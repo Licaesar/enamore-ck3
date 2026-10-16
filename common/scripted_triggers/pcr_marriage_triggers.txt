@@ -1,4 +1,5 @@
-﻿fmp_can_marry_actor_trigger = {
+﻿# Prisioneiro que pode ser casado à força pelo captor (escopo: o prisioneiro)
+pcr_can_force_marry_trigger = {
 	is_imprisoned_by = scope:actor
 	NOT = { is_spouse_of = scope:actor }
 	is_adult = yes

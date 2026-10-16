@@ -1,0 +1,35 @@
+﻿# Casamento forçado: opinião do ex-cônjuge
+pcr_rightful_spouse_opinion = {
+	opinion = 5
+	years = 20
+	decaying = yes
+}
+
+pcr_stole_my_wife_opinion = {
+	opinion = -50
+	years = 20
+	decaying = yes
+}
+
+pcr_stole_my_husband_opinion = {
+	opinion = -50
+	years = 20
+	decaying = yes
+}
+
+# Evento de gravidez forçada: opinião da prisioneira, fixa por 10 anos
+pcr_forced_union_negative_opinion = {
+	opinion = -100
+	max = -100
+	min = -100
+	decay = 0
+	months = 120
+}
+
+pcr_forced_union_positive_opinion = {
+	opinion = 100
+	max = 100
+	min = 100
+	decay = 0
+	months = 120
+}

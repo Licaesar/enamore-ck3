@@ -1,4 +1,5 @@
-﻿fmp_interaction_effect = {
+﻿# Efeito do casamento forçado (pcr_force_marriage_interaction)
+pcr_force_marriage_effect = {
 	scope:recipient = {
 		if = {
 			limit = {
@@ -24,16 +25,16 @@
 					modifier = demanded_recruitment
 				}
 			}
+			# Desfaz o casamento anterior: o ex-cônjuge guarda boa opinião do prisioneiro e rancor do captor
 			if = {
 				limit = {
 					is_married = yes
 				}
 				every_spouse = {
-					#trigger_event = marriage_interaction.0041
-					divorce = scope:recipient # no opinion hit, no scripted effect
+					divorce = scope:recipient
 					add_opinion = {
 						target = scope:recipient
-						modifier =  fmp_rightful_spouse_opinion
+						modifier = pcr_rightful_spouse_opinion
 					}
 					scope:recipient = { save_scope_as = relationship_reason_involved_character }
 					progress_towards_rival_effect = {
@@ -46,20 +47,19 @@
 						limit = { scope:recipient = { is_female = yes } }
 						add_opinion = {
 							target = scope:actor
-							modifier =  fmp_stole_my_wife_opinion
+							modifier = pcr_stole_my_wife_opinion
 						}
 					}
 					else = {
 						add_opinion = {
 							target = scope:actor
-							modifier = fmp_stole_my_husband_opinion
+							modifier = pcr_stole_my_husband_opinion
 						}
 					}
 				}
 			}
 			if = {
 				limit = { exists = betrothed }
-				#trigger_event = marriage_interaction.0041 # opinion event
 				break_betrothal = betrothed
 			}
 		}
@@ -74,9 +74,7 @@
 		}
 	}
 
-	###MANAGEMENT SCRIPT FOR VARIOUS EVENTS/CONTENT###
-
-	#If your spouse councillor had boosted the chance of marriage, remove modifier
+	# Remove os modificadores do conselheiro cônjuge que facilitam casar herdeiro ou filho, como no vanilla
 	if = {
 		limit = {
 			scope:secondary_actor = {

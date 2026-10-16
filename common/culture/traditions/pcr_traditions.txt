@@ -1,7 +1,6 @@
-﻿# The normal marriage candidate window uses these hardcoded cultural
-# parameters before it evaluates scripted marriage triggers.
-
-tradition_mwt_unbound_unions = {
+﻿# Costume das Uniões Livres. A busca de cônjuges do motor lê o limite da cultura
+# antes dos gatilhos de script, por isso o limite precisa estar na tradição.
+tradition_pcr_unbound_unions = {
 	category = ritual
 
 	layers = {
@@ -12,9 +11,10 @@ tradition_mwt_unbound_unions = {
 
 	can_pick = {
 		custom_tooltip = {
-			text = mwt_unbound_unions_tradition_requires_trait_tt
-			scope:character = { has_trait = mwt_unbound_unions }
+			text = pcr_unbound_unions_tradition_requires_trait_tt
+			scope:character = { has_trait = pcr_unbound_unions }
 		}
+		# Só uma tradição de casamento por cultura
 		custom_tooltip = {
 			text = only_one_marriage_tradition_allowed
 			trigger_if = {
@@ -38,7 +38,7 @@ tradition_mwt_unbound_unions = {
 	}
 
 	can_pick_for_hybridization = {
-		scope:character = { has_trait = mwt_unbound_unions }
+		scope:character = { has_trait = pcr_unbound_unions }
 		NOR = {
 			culture_tradition:tradition_monogamous = { is_in_list = traits }
 			culture_tradition:tradition_polygamous = { is_in_list = traits }

@@ -1,9 +1,12 @@
-﻿fmp_interaction = {
+﻿# Interações de prisão do Polycarater
+
+# Casar à força um prisioneiro com alguém da corte do captor
+pcr_force_marriage_interaction = {
 	common_interaction = yes
 
 	category = interaction_category_diplomacy
 
-	desc = fmp_interaction_desc
+	desc = pcr_force_marriage_interaction_desc
 
 	interface = marriage
 	send_options_exclusive = no
@@ -15,13 +18,14 @@
 		}
 	}
 
+	# Candidatos do lado do captor: ele mesmo, os cortesãos e os filhos
 	populate_actor_list = {
 		scope:actor = {
 			if = {
 				limit = {
 					sex_opposite_of = scope:recipient
 					allowed_more_spouses = yes
-					# My faith allows this level of consanguinity
+					# A fé permite este grau de parentesco
 					OR = {
 						NOT = { is_close_or_extended_family_of = scope:recipient }
 						AND = {
@@ -46,7 +50,7 @@
 					allowed_more_spouses = yes
 					sex_opposite_of = scope:recipient
 					NOT = { is_spouse_of = scope:recipient }
-					# My faith allows this level of consanguinity
+					# A fé permite este grau de parentesco
 					OR = {
 						NOT = { is_close_or_extended_family_of = scope:recipient }
 						AND = {
@@ -71,7 +75,7 @@
 					allowed_more_spouses = yes
 					sex_opposite_of = scope:recipient
 					NOT = { is_spouse_of = scope:recipient }
-					# My faith allows this level of consanguinity
+					# A fé permite este grau de parentesco
 					OR = {
 						NOT = { is_close_or_extended_family_of = scope:recipient }
 						AND = {
@@ -116,12 +120,12 @@
 	is_shown = {
 		scope:recipient = {
 			is_imprisoned_by = scope:actor
-			fmp_can_marry_actor_trigger = yes
+			pcr_can_force_marry_trigger = yes
 		}
 	}
 
 	on_accept = {
-		fmp_interaction_effect = yes
+		pcr_force_marriage_effect = yes
 	}
 
 	auto_accept = yes
@@ -129,4 +133,45 @@
 	ai_will_do = {
 		base = -1000
 	}
+}
+
+# Engravidar uma prisioneira; só para o jogador
+pcr_impregnate_interaction = {
+	category = interaction_category_prison
+	icon = pregnant
+	desc = pcr_impregnate_interaction_desc
+
+	on_accept = {
+		scope:recipient = { save_scope_as = target_captive }
+		scope:actor = {
+			trigger_event = {
+				id = pcr_impregnate.0001
+				days = 0
+			}
+		}
+	}
+
+	is_shown = {
+		scope:actor = { is_ai = no }
+		scope:recipient = {
+			is_female = yes
+			is_imprisoned_by = scope:actor
+			is_adult = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			is_male = yes
+			is_fertile = yes
+		}
+		scope:recipient = {
+			is_fertile = yes
+			is_pregnant = no
+			NOT = { has_character_modifier = pcr_impregnate_cooldown_modifier }
+		}
+	}
+
+	target_type = character
+	auto_accept = yes
 }

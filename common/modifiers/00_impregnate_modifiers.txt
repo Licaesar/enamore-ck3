@@ -1,3 +1,0 @@
-impregnate_cooldown_mod = {
-    # 这是一个纯粹的隐形冷却标记，没有任何数值加成
-}

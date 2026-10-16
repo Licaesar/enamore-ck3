@@ -1,9 +1,0 @@
-﻿l_english:
-
- fmp_interaction:0 "Forcefully Marry Prisoner"
- fmp_interaction_desc:0 "Forcefully marry [recipient.GetShortUINameNoTooltip] to someone in your court."
- actor_secondary_fmp_interaction:0 "Sender"
-
- fmp_rightful_spouse_opinion:0 "Rightful Spouse"
- fmp_stole_my_wife_opinion:0 "Wife Stealer"
- fmp_stole_my_husband_opinion:0 "Husband Stealer"

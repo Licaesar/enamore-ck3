@@ -1,48 +1,46 @@
-﻿# These definitions intentionally replace the vanilla scripted triggers
-# of the same names after 00_marriage_triggers.txt has loaded.
-# Characters without mwt_unbound_unions continue to use the vanilla engine
-# checks, while trait holders use their exact trait-specific caps.
+﻿# Sobrescritas de gatilhos vanilla de common/scripted_triggers/00_marriage_triggers.txt.
+# O prefixo zz_ faz este arquivo carregar depois do vanilla. Os nomes não levam pcr_
+# porque precisam ser iguais aos do vanilla para substituí-los.
+# Regra: quem tem pcr_unbound_unions tem até 2 cônjuges e 3 concubinas; numa cultura com
+# tradition_pcr_unbound_unions, quem não tem o traço fica com 1 cônjuge e sem concubinas.
+# Sem o traço e sem a tradição, vale o comportamento vanilla.
 
-# Vanilla source: common/scripted_triggers/00_marriage_triggers.txt
 can_marry_trigger = {
 	can_marry_common_trigger = yes
 
 	trigger_if = {
-		limit = { has_trait = mwt_unbound_unions }
+		limit = { has_trait = pcr_unbound_unions }
 		custom_description = {
-			text = mwt_unbound_unions_spouse_cap_tt
+			text = pcr_unbound_unions_spouse_cap_tt
 			any_spouse = { count < 2 }
 		}
 	}
 	trigger_else_if = {
 		limit = {
 			culture = {
-				has_cultural_tradition = tradition_mwt_unbound_unions
+				has_cultural_tradition = tradition_pcr_unbound_unions
 			}
 		}
 		custom_description = {
-			text = mwt_unbound_unions_trait_required_for_secondary_spouse_tt
+			text = pcr_unbound_unions_trait_required_for_secondary_spouse_tt
 			any_spouse = { count < 1 }
 		}
 	}
 	trigger_else = {
 		allowed_more_spouses = yes
 	}
-
-	# To account for a person marrying their concubine, callers should continue
-	# to use can_marry_character_trigger, matching the vanilla behavior.
+	# Para casar com a própria concubina, use can_marry_character_trigger, como no vanilla
 }
 
-# Vanilla source: common/scripted_triggers/00_marriage_triggers.txt
 make_concubine_is_shown_trigger = {
 	scope:actor = {
 		trigger_if = {
 			limit = {
 				culture = {
-					has_cultural_tradition = tradition_mwt_unbound_unions
+					has_cultural_tradition = tradition_pcr_unbound_unions
 				}
 			}
-			has_trait = mwt_unbound_unions
+			has_trait = pcr_unbound_unions
 		}
 		trigger_else = {
 			allowed_concubines = yes
@@ -58,21 +56,20 @@ make_concubine_is_shown_trigger = {
 	}
 }
 
-# Vanilla source: common/scripted_triggers/00_marriage_triggers.txt
 make_concubine_is_valid_trigger = {
 	trigger_if = {
 		limit = {
 			scope:actor = {
 				culture = {
-					has_cultural_tradition = tradition_mwt_unbound_unions
+					has_cultural_tradition = tradition_pcr_unbound_unions
 				}
 			}
 		}
 		custom_description = {
-			text = mwt_unbound_unions_concubine_cap_tt
+			text = pcr_unbound_unions_concubine_cap_tt
 			object = scope:recipient
 			scope:actor = {
-				has_trait = mwt_unbound_unions
+				has_trait = pcr_unbound_unions
 				number_of_concubines < 3
 			}
 		}
@@ -106,18 +103,17 @@ make_concubine_is_valid_trigger = {
 	}
 }
 
-# The vanilla Find Concubine interface calls this trigger while building its
-# candidate list. Gate the prospective concubinist when our cultural engine
-# parameters are active, so culture members without the trait get no targets.
+# A janela "Encontrar concubina" usa este gatilho para montar a lista; numa cultura com
+# a tradição, quem não tem o traço não recebe candidatas.
 can_become_concubine_of_character_trigger = {
 	$CHARACTER$ = {
 		trigger_if = {
 			limit = {
 				culture = {
-					has_cultural_tradition = tradition_mwt_unbound_unions
+					has_cultural_tradition = tradition_pcr_unbound_unions
 				}
 			}
-			has_trait = mwt_unbound_unions
+			has_trait = pcr_unbound_unions
 		}
 	}
 
@@ -153,10 +149,10 @@ can_become_concubine_of_character_valid_trigger = {
 		trigger_if = {
 			limit = {
 				culture = {
-					has_cultural_tradition = tradition_mwt_unbound_unions
+					has_cultural_tradition = tradition_pcr_unbound_unions
 				}
 			}
-			has_trait = mwt_unbound_unions
+			has_trait = pcr_unbound_unions
 		}
 	}
 
@@ -194,10 +190,10 @@ can_be_offered_as_concubine_to_character_trigger = {
 		trigger_if = {
 			limit = {
 				culture = {
-					has_cultural_tradition = tradition_mwt_unbound_unions
+					has_cultural_tradition = tradition_pcr_unbound_unions
 				}
 			}
-			has_trait = mwt_unbound_unions
+			has_trait = pcr_unbound_unions
 		}
 	}
 

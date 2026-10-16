@@ -1,0 +1,41 @@
+﻿l_english:
+
+ # Casamento forçado
+ pcr_force_marriage_interaction:0 "Forcefully Marry Prisoner"
+ pcr_force_marriage_interaction_desc:0 "Forcefully marry [recipient.GetShortUINameNoTooltip] to someone in your court."
+ actor_secondary_pcr_force_marriage_interaction:0 "Sender"
+
+ pcr_rightful_spouse_opinion:0 "Rightful Spouse"
+ pcr_stole_my_wife_opinion:0 "Wife Stealer"
+ pcr_stole_my_husband_opinion:0 "Husband Stealer"
+
+ # Gravidez forçada
+ pcr_impregnate_interaction:0 "Impregnate Captive"
+ pcr_impregnate_interaction_desc:0 "Force your female captive to bear your child."
+
+ pcr_impregnate.0001.t:0 "Forced Union"
+ pcr_impregnate.0001.desc:0 "You order your guards to bring the female captive to your chambers. Whether she wills it or not, after tonight, she may carry your blood in her womb."
+ pcr_impregnate.0001.desc_pleasure:0 "You have her brought before you once more. This time, she does not struggle. She keeps her head lowered, refusing to meet your gaze, yet when your hand brushes her waist, her breath falters. She bites her lip, as if trying to resist the familiar sensation, but her body trembles beyond her control. She hates herself for this, hates that her body has already memorized you. You lean close and whisper against her ear, and she shuts her eyes — a flush of shame spreads from her neck to the tips of her ears. Whether she denies it or not, after tonight, she may carry your blood once more."
+ pcr_impregnate.0001.a:0 "You have no say in this."
+
+ pcr_forced_union_negative_opinion:0 "Forced Union"
+ pcr_forced_union_positive_opinion:0 "Unexpected Passion"
+
+ pcr_impregnate_birth_toast:0 "Birth of a Bastard"
+ pcr_impregnate_birth_toast_desc:0 "Your female captive has borne you a child. The world does not know you are the father, but this secret will remain in your heart forever."
+
+ pcr_impregnate_cooldown_modifier:0 "Afterglow"
+
+ # Uniões Livres
+ trait_pcr_unbound_unions:0 "Unbound Unions"
+ trait_pcr_unbound_unions_desc:0 "This character treats the marriage customs of faith and culture as guidance rather than law. They may have up to two [spouses|E] and three [concubines|E], regardless of whether their faith or culture normally permits those forms of union."
+ pcr_unbound_unions_spouse_cap_tt:0 "A character with [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] must have fewer than two [spouses|E]"
+ pcr_unbound_unions_concubine_cap_tt:0 "A character with [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] must have fewer than three [concubines|E]"
+ pcr_unbound_unions_trait_required_for_secondary_spouse_tt:0 "Without [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )], a member of this culture may not take a secondary [spouse|E]"
+ tradition_pcr_unbound_unions_name:0 "Unbound Union Customs"
+ tradition_pcr_unbound_unions_desc:0 "This culture recognizes exceptional household arrangements only for rulers who bear the Unbound Unions trait. Such rulers may have up to two spouses and three concubines, irrespective of their faith's usual form of marriage; culture members without the trait remain limited to one spouse and may not take concubines under this custom."
+ pcr_unbound_unions_tradition_requires_trait_tt:0 "The reforming character must have the [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] trait"
+ pcr_establish_unbound_unions_decision:0 "Establish Unbound Union Customs"
+ pcr_establish_unbound_unions_decision_desc:0 "The marriage finder follows cultural custom more strictly than individual privilege. I can formally establish a custom that lets rulers with the Unbound Unions trait have two spouses and three concubines, while denying that privilege to culture members without the trait."
+ pcr_establish_unbound_unions_decision_tooltip:0 "Replace this culture's existing marriage tradition, if any, with Unbound Union Customs"
+ pcr_establish_unbound_unions_decision_confirm:0 "Establish the Custom"

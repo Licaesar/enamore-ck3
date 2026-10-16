@@ -58,16 +58,15 @@ pcr_impregnate.0001 = {
 			scope:target_captive = { add_character_flag = pcr_impregnate_interacted }
 		}
 
-		# 60% de chance de gravidez
+		# Gravidez garantida. O flag allow_event_pregnancy impede que a regra de gravidez
+		# realista do Love Marriage encerre a gravidez (prisioneira e pai não estão juntos);
+		# sem esse mod, o flag não faz nada.
 		if = {
 			limit = { scope:target_captive = { is_pregnant = no } }
-
-			random = {
-				chance = 60
-				scope:target_captive = {
-					make_pregnant = { father = root }
-					add_character_flag = pcr_force_bred_by_player
-				}
+			scope:target_captive = {
+				add_character_flag = { flag = allow_event_pregnancy days = 61 }
+				make_pregnant = { father = root }
+				add_character_flag = pcr_force_bred_by_player
 			}
 		}
 
@@ -108,12 +107,14 @@ pcr_impregnate.0002 = {
 	}
 
 	immediate = {
+		# Dentro de mother = { }, real_father seria o pai da mãe; por isso salva o da criança
+		real_father = { save_scope_as = pcr_child_father }
 		if = {
 			limit = {
 				mother = {
 					OR = {
 						has_character_flag = pcr_force_bred_by_player
-						is_imprisoned_by = real_father
+						is_imprisoned_by = scope:pcr_child_father
 					}
 				}
 			}
@@ -122,7 +123,7 @@ pcr_impregnate.0002 = {
 
 			if = {
 				limit = { mother = { is_married = no } }
-				real_father = {
+				scope:pcr_child_father = {
 					send_interface_toast = {
 						type = event_toast_effect_neutral
 						title = pcr_impregnate_birth_toast

@@ -46,3 +46,39 @@ pcr_establish_unbound_unions_decision = {
 
 	ai_will_do = { base = 0 }
 }
+
+# O jogador, numa cultura com o costume das Uniões Livres, compra o traço com piedade
+pcr_adopt_unbound_unions_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+
+	desc = pcr_adopt_unbound_unions_decision_desc
+	selection_tooltip = pcr_adopt_unbound_unions_decision_tooltip
+	confirm_text = pcr_adopt_unbound_unions_decision_confirm
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		NOT = { has_trait = pcr_unbound_unions }
+		culture = {
+			has_cultural_tradition = tradition_pcr_unbound_unions
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_adult = yes
+		is_imprisoned = no
+	}
+
+	cost = {
+		piety = 500
+	}
+
+	effect = {
+		add_trait = pcr_unbound_unions
+	}
+
+	ai_will_do = { base = 0 }
+}

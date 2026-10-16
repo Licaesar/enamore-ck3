@@ -13,6 +13,8 @@
  # Gravidez forçada
  pcr_impregnate_interaction:0 "Impregnate Captive"
  pcr_impregnate_interaction_desc:0 "Force your female captive to bear your child."
+ pcr_impregnate_actor_not_fertile_tt:0 "You have no [fertility|E]"
+ pcr_impregnate_recipient_not_fertile_tt:0 "[recipient.GetShortUINameNoTooltip|U] has no [fertility|E]"
 
  pcr_impregnate.0001.t:0 "Forced Union"
  pcr_impregnate.0001.desc:0 "You order your guards to bring the female captive to your chambers. Whether she wills it or not, after tonight, she may carry your blood in her womb."
@@ -27,14 +29,17 @@
 
  # Uniões Livres
  trait_pcr_unbound_unions:0 "Unbound Unions"
- trait_pcr_unbound_unions_desc:0 "This character treats the marriage customs of faith and culture as guidance rather than law. They may have up to two [spouses|E] and three [concubines|E], regardless of whether their faith or culture normally permits those forms of union."
- pcr_unbound_unions_spouse_cap_tt:0 "A character with [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] must have fewer than two [spouses|E]"
- pcr_unbound_unions_concubine_cap_tt:0 "A character with [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] must have fewer than three [concubines|E]"
+ trait_pcr_unbound_unions_desc:0 "This character treats the marriage customs of faith and culture as guidance rather than law. They may have up to ten [spouses|E], regardless of whether their faith or culture normally permits more than one."
+ pcr_unbound_unions_spouse_cap_tt:0 "A character with [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] must have fewer than ten [spouses|E]"
  pcr_unbound_unions_trait_required_for_secondary_spouse_tt:0 "Without [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )], a member of this culture may not take a secondary [spouse|E]"
  tradition_pcr_unbound_unions_name:0 "Unbound Union Customs"
- tradition_pcr_unbound_unions_desc:0 "This culture recognizes exceptional household arrangements only for rulers who bear the Unbound Unions trait. Such rulers may have up to two spouses and three concubines, irrespective of their faith's usual form of marriage; culture members without the trait remain limited to one spouse and may not take concubines under this custom."
+ tradition_pcr_unbound_unions_desc:0 "This culture recognizes exceptional households only for those who bear the Unbound Unions trait. They may have up to ten spouses, irrespective of their faith's usual form of marriage; culture members without the trait remain limited to one spouse. Concubines follow the rules of each faith."
  pcr_unbound_unions_tradition_requires_trait_tt:0 "The reforming character must have the [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] trait"
  pcr_establish_unbound_unions_decision:0 "Establish Unbound Union Customs"
- pcr_establish_unbound_unions_decision_desc:0 "The marriage finder follows cultural custom more strictly than individual privilege. I can formally establish a custom that lets rulers with the Unbound Unions trait have two spouses and three concubines, while denying that privilege to culture members without the trait."
+ pcr_establish_unbound_unions_decision_desc:0 "The marriage finder follows cultural custom more strictly than individual privilege. I can formally establish a custom that lets those with the Unbound Unions trait have up to ten spouses, while denying that privilege to culture members without the trait."
  pcr_establish_unbound_unions_decision_tooltip:0 "Replace this culture's existing marriage tradition, if any, with Unbound Union Customs"
  pcr_establish_unbound_unions_decision_confirm:0 "Establish the Custom"
+ pcr_adopt_unbound_unions_decision:0 "Embrace Unbound Unions"
+ pcr_adopt_unbound_unions_decision_desc:0 "My culture honors those who bear the Unbound Unions trait. With enough [piety|E], I can claim that privilege for myself."
+ pcr_adopt_unbound_unions_decision_tooltip:0 "Gain the [GetTrait('pcr_unbound_unions').GetName( GetNullCharacter )] trait"
+ pcr_adopt_unbound_unions_decision_confirm:0 "Embrace It"

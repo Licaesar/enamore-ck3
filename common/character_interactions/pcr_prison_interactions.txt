@@ -163,10 +163,16 @@ pcr_impregnate_interaction = {
 	is_valid_showing_failures_only = {
 		scope:actor = {
 			is_male = yes
-			fertility > 0
+			custom_tooltip = {
+				text = pcr_impregnate_actor_not_fertile_tt
+				fertility > 0
+			}
 		}
 		scope:recipient = {
-			fertility > 0
+			custom_tooltip = {
+				text = pcr_impregnate_recipient_not_fertile_tt
+				fertility > 0
+			}
 			is_pregnant = no
 		}
 	}

@@ -1,5 +1,5 @@
-﻿# Uniões Livres: até dois cônjuges e três concubinas, independentemente de fé e cultura.
-# A regra está nos gatilhos sobrescritos em common/scripted_triggers/zz_pcr_marriage_overrides.txt.
+﻿# Uniões Livres: até 10 esposas, independentemente de fé e cultura.
+# A regra está no can_marry_trigger sobrescrito em common/scripted_triggers/zz_pcr_marriage_overrides.txt.
 pcr_unbound_unions = {
 	icon = seducer.dds
 

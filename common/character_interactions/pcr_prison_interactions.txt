@@ -19,7 +19,7 @@ pcr_force_marriage_interaction = {
 	}
 
 	# Candidatos do lado do captor: ele mesmo, os cortesãos e os filhos.
-	# can_marry_trigger respeita o limite do traço pcr_unbound_unions.
+	# can_marry_trigger respeita o limite do traço pcr_enamore.
 	populate_actor_list = {
 		scope:actor = {
 			if = {

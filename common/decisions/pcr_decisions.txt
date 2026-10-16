@@ -1,22 +1,22 @@
-﻿# Estabelece o costume das Uniões Livres na cultura do governante com o traço
-pcr_establish_unbound_unions_decision = {
+﻿# Estabelece o costume Enamore na cultura do governante com o traço
+pcr_establish_enamore_decision = {
 	decision_group_type = major
 
 	picture = {
 		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
 	}
 
-	desc = pcr_establish_unbound_unions_decision_desc
-	selection_tooltip = pcr_establish_unbound_unions_decision_tooltip
-	confirm_text = pcr_establish_unbound_unions_decision_confirm
+	desc = pcr_establish_enamore_decision_desc
+	selection_tooltip = pcr_establish_enamore_decision_tooltip
+	confirm_text = pcr_establish_enamore_decision_confirm
 
 	ai_check_interval = 0
 
 	is_shown = {
 		is_ruler = yes
-		has_trait = pcr_unbound_unions
+		has_trait = pcr_enamore
 		culture = {
-			NOT = { has_cultural_tradition = tradition_pcr_unbound_unions }
+			NOT = { has_cultural_tradition = tradition_pcr_enamore_customs }
 		}
 	}
 
@@ -25,7 +25,7 @@ pcr_establish_unbound_unions_decision = {
 		is_imprisoned = no
 	}
 
-	# Troca a tradição de casamento atual da cultura pela das Uniões Livres
+	# Troca a tradição de casamento atual da cultura pela Enamore
 	effect = {
 		culture = {
 			if = {
@@ -40,30 +40,30 @@ pcr_establish_unbound_unions_decision = {
 				limit = { has_cultural_tradition = tradition_concubines }
 				remove_culture_tradition = tradition_concubines
 			}
-			add_culture_tradition = tradition_pcr_unbound_unions
+			add_culture_tradition = tradition_pcr_enamore_customs
 		}
 	}
 
 	ai_will_do = { base = 0 }
 }
 
-# O jogador, numa cultura com o costume das Uniões Livres, compra o traço com piedade
-pcr_adopt_unbound_unions_decision = {
+# O jogador, numa cultura com o costume Enamore, compra o traço com piedade
+pcr_adopt_enamore_decision = {
 	picture = {
 		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
 	}
 
-	desc = pcr_adopt_unbound_unions_decision_desc
-	selection_tooltip = pcr_adopt_unbound_unions_decision_tooltip
-	confirm_text = pcr_adopt_unbound_unions_decision_confirm
+	desc = pcr_adopt_enamore_decision_desc
+	selection_tooltip = pcr_adopt_enamore_decision_tooltip
+	confirm_text = pcr_adopt_enamore_decision_confirm
 
 	ai_check_interval = 0
 
 	is_shown = {
 		is_ai = no
-		NOT = { has_trait = pcr_unbound_unions }
+		NOT = { has_trait = pcr_enamore }
 		culture = {
-			has_cultural_tradition = tradition_pcr_unbound_unions
+			has_cultural_tradition = tradition_pcr_enamore_customs
 		}
 	}
 
@@ -77,7 +77,7 @@ pcr_adopt_unbound_unions_decision = {
 	}
 
 	effect = {
-		add_trait = pcr_unbound_unions
+		add_trait = pcr_enamore
 	}
 
 	ai_will_do = { base = 0 }

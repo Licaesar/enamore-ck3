@@ -1,28 +1,28 @@
 ﻿# Sobrescrita do gatilho vanilla can_marry_trigger (common/scripted_triggers/00_marriage_triggers.txt).
 # O prefixo zz_ faz este arquivo carregar depois do vanilla; o nome não leva pcr_ porque
 # precisa ser igual ao do vanilla para substituí-lo.
-# Regra: quem tem pcr_unbound_unions pode ter até 10 esposas; numa cultura com
-# tradition_pcr_unbound_unions, quem não tem o traço fica com 1. Sem o traço e sem a
+# Regra: quem tem pcr_enamore pode ter até 10 esposas; numa cultura com
+# tradition_pcr_enamore_customs, quem não tem o traço fica com 1. Sem o traço e sem a
 # tradição, vale o vanilla. Concubinas seguem sempre as regras vanilla.
 
 can_marry_trigger = {
 	can_marry_common_trigger = yes
 
 	trigger_if = {
-		limit = { has_trait = pcr_unbound_unions }
+		limit = { has_trait = pcr_enamore }
 		custom_description = {
-			text = pcr_unbound_unions_spouse_cap_tt
+			text = pcr_enamore_spouse_cap_tt
 			any_spouse = { count < 10 }
 		}
 	}
 	trigger_else_if = {
 		limit = {
 			culture = {
-				has_cultural_tradition = tradition_pcr_unbound_unions
+				has_cultural_tradition = tradition_pcr_enamore_customs
 			}
 		}
 		custom_description = {
-			text = pcr_unbound_unions_trait_required_for_secondary_spouse_tt
+			text = pcr_enamore_trait_required_for_secondary_spouse_tt
 			any_spouse = { count < 1 }
 		}
 	}

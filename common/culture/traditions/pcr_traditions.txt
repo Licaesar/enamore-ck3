@@ -1,6 +1,6 @@
-﻿# Costume das Uniões Livres. A busca de cônjuges do motor lê o limite da cultura
+﻿# Costume Enamore. A busca de cônjuges do motor lê o limite da cultura
 # antes dos gatilhos de script, por isso o limite precisa estar na tradição.
-tradition_pcr_unbound_unions = {
+tradition_pcr_enamore_customs = {
 	category = ritual
 
 	layers = {
@@ -11,8 +11,8 @@ tradition_pcr_unbound_unions = {
 
 	can_pick = {
 		custom_tooltip = {
-			text = pcr_unbound_unions_tradition_requires_trait_tt
-			scope:character = { has_trait = pcr_unbound_unions }
+			text = pcr_enamore_tradition_requires_trait_tt
+			scope:character = { has_trait = pcr_enamore }
 		}
 		# Só uma tradição de casamento por cultura
 		custom_tooltip = {
@@ -38,7 +38,7 @@ tradition_pcr_unbound_unions = {
 	}
 
 	can_pick_for_hybridization = {
-		scope:character = { has_trait = pcr_unbound_unions }
+		scope:character = { has_trait = pcr_enamore }
 		NOR = {
 			culture_tradition:tradition_monogamous = { is_in_list = traits }
 			culture_tradition:tradition_polygamous = { is_in_list = traits }

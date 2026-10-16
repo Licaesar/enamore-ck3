@@ -1,0 +1,102 @@
+﻿fmp_interaction_effect = {
+	scope:recipient = {
+		if = {
+			limit = {
+				has_trait = devoted
+			}
+			remove_trait = devoted
+		}
+		if = {
+			limit = {
+				is_imprisoned = yes
+			}
+			release_from_prison = yes
+			if = {
+				limit = {
+					NOR = {
+						has_relation_lover = scope:actor
+						has_relation_soulmate = scope:actor
+						is_courtier_of = scope:actor
+					}
+				}
+				add_opinion = {
+					target = scope:actor
+					modifier = demanded_recruitment
+				}
+			}
+			if = {
+				limit = {
+					is_married = yes
+				}
+				every_spouse = {
+					#trigger_event = marriage_interaction.0041
+					divorce = scope:recipient # no opinion hit, no scripted effect
+					add_opinion = {
+						target = scope:recipient
+						modifier =  fmp_rightful_spouse_opinion
+					}
+					scope:recipient = { save_scope_as = relationship_reason_involved_character }
+					progress_towards_rival_effect = {
+						CHARACTER = scope:actor
+						REASON = rival_slept_with_spouse
+						OPINION = 0
+					}
+					clear_saved_scope = relationship_reason_involved_character
+					if = {
+						limit = { scope:recipient = { is_female = yes } }
+						add_opinion = {
+							target = scope:actor
+							modifier =  fmp_stole_my_wife_opinion
+						}
+					}
+					else = {
+						add_opinion = {
+							target = scope:actor
+							modifier = fmp_stole_my_husband_opinion
+						}
+					}
+				}
+			}
+			if = {
+				limit = { exists = betrothed }
+				#trigger_event = marriage_interaction.0041 # opinion event
+				break_betrothal = betrothed
+			}
+		}
+	}
+	scope:secondary_actor = {
+		if = {
+			limit = { scope:matrilineal = yes }
+			marry_matrilineal = scope:secondary_recipient
+		}
+		else = {
+			marry = scope:secondary_recipient
+		}
+	}
+
+	###MANAGEMENT SCRIPT FOR VARIOUS EVENTS/CONTENT###
+
+	#If your spouse councillor had boosted the chance of marriage, remove modifier
+	if = {
+		limit = {
+			scope:secondary_actor = {
+				has_character_modifier = heir_easier_to_marry_off_modifier
+			}
+			scope:actor = { player_heir = scope:secondary_actor }
+		}
+		scope:secondary_actor = {
+			remove_character_modifier = heir_easier_to_marry_off_modifier
+		}
+	}
+	if = {
+		limit = {
+			scope:secondary_actor = {
+				is_child_of = scope:actor
+				has_character_modifier = child_easier_to_marry_off_modifier
+			}
+		}
+		scope:secondary_actor = {
+			remove_character_modifier = child_easier_to_marry_off_modifier
+		}
+	}
+}

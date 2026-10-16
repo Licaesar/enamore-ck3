@@ -1,0 +1,236 @@
+﻿# These definitions intentionally replace the vanilla scripted triggers
+# of the same names after 00_marriage_triggers.txt has loaded.
+# Characters without mwt_unbound_unions continue to use the vanilla engine
+# checks, while trait holders use their exact trait-specific caps.
+
+# Vanilla source: common/scripted_triggers/00_marriage_triggers.txt
+can_marry_trigger = {
+	can_marry_common_trigger = yes
+
+	trigger_if = {
+		limit = { has_trait = mwt_unbound_unions }
+		custom_description = {
+			text = mwt_unbound_unions_spouse_cap_tt
+			any_spouse = { count < 2 }
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			culture = {
+				has_cultural_tradition = tradition_mwt_unbound_unions
+			}
+		}
+		custom_description = {
+			text = mwt_unbound_unions_trait_required_for_secondary_spouse_tt
+			any_spouse = { count < 1 }
+		}
+	}
+	trigger_else = {
+		allowed_more_spouses = yes
+	}
+
+	# To account for a person marrying their concubine, callers should continue
+	# to use can_marry_character_trigger, matching the vanilla behavior.
+}
+
+# Vanilla source: common/scripted_triggers/00_marriage_triggers.txt
+make_concubine_is_shown_trigger = {
+	scope:actor = {
+		trigger_if = {
+			limit = {
+				culture = {
+					has_cultural_tradition = tradition_mwt_unbound_unions
+				}
+			}
+			has_trait = mwt_unbound_unions
+		}
+		trigger_else = {
+			allowed_concubines = yes
+		}
+		is_adult = yes
+	}
+	scope:recipient = {
+		OR = {
+			is_courtier_of = scope:actor
+			is_imprisoned_by = scope:actor
+		}
+		can_become_concubine_of_character_valid_trigger = { CHARACTER = scope:actor }
+	}
+}
+
+# Vanilla source: common/scripted_triggers/00_marriage_triggers.txt
+make_concubine_is_valid_trigger = {
+	trigger_if = {
+		limit = {
+			scope:actor = {
+				culture = {
+					has_cultural_tradition = tradition_mwt_unbound_unions
+				}
+			}
+		}
+		custom_description = {
+			text = mwt_unbound_unions_concubine_cap_tt
+			object = scope:recipient
+			scope:actor = {
+				has_trait = mwt_unbound_unions
+				number_of_concubines < 3
+			}
+		}
+	}
+	trigger_else = {
+		custom_description = {
+			text = take_concubine_allowed_more
+			object = scope:recipient
+			scope:actor = { allowed_more_concubines = yes }
+		}
+	}
+
+	scope:recipient = {
+		custom_tooltip = {
+			text = take_concubine_ex_spouse
+			NOT = {
+				has_opinion_modifier = {
+					modifier = divorced_me_opinion
+					target = scope:actor
+				}
+			}
+		}
+		OR = {
+			AND = {
+				is_imprisoned_by = scope:actor
+				is_married = yes
+			}
+			is_married = no
+		}
+		is_hostage = no
+	}
+}
+
+# The vanilla Find Concubine interface calls this trigger while building its
+# candidate list. Gate the prospective concubinist when our cultural engine
+# parameters are active, so culture members without the trait get no targets.
+can_become_concubine_of_character_trigger = {
+	$CHARACTER$ = {
+		trigger_if = {
+			limit = {
+				culture = {
+					has_cultural_tradition = tradition_mwt_unbound_unions
+				}
+			}
+			has_trait = mwt_unbound_unions
+		}
+	}
+
+	is_available_quick = {
+		adult = yes
+		ruler = no
+		advanced_ruler = no
+		hostage = no
+	}
+	trigger_if = {
+		limit = { NOT = { is_imprisoned_by = $CHARACTER$ } }
+		is_married = no
+		is_betrothed = no
+		is_concubine = no
+		number_of_concubines = 0
+	}
+	trigger_if = {
+		limit = {
+			is_imprisoned_by = $CHARACTER$
+			is_married = yes
+		}
+		NOT = { is_spouse_of = $CHARACTER$ }
+	}
+	NOR = {
+		is_concubine_of = $CHARACTER$
+		has_character_flag = has_been_offered_as_concubine
+	}
+	could_marry_character_trigger = { CHARACTER = $CHARACTER$ }
+}
+
+can_become_concubine_of_character_valid_trigger = {
+	$CHARACTER$ = {
+		trigger_if = {
+			limit = {
+				culture = {
+					has_cultural_tradition = tradition_mwt_unbound_unions
+				}
+			}
+			has_trait = mwt_unbound_unions
+		}
+	}
+
+	is_available_quick = {
+		adult = yes
+		ruler = no
+		advanced_ruler = no
+	}
+	trigger_if = {
+		limit = { NOT = { is_imprisoned_by = $CHARACTER$ } }
+		is_married = no
+		is_betrothed = no
+		is_concubine = no
+		is_diarch = no
+		number_of_concubines = 0
+	}
+	trigger_if = {
+		limit = {
+			is_imprisoned_by = $CHARACTER$
+			is_married = yes
+		}
+		NOT = { is_spouse_of = $CHARACTER$ }
+	}
+	NOR = {
+		is_concubine_of = $CHARACTER$
+		has_character_flag = has_been_offered_as_concubine
+	}
+	can_take_as_concubine_character_trigger = { CHARACTER = $CHARACTER$ }
+	has_any_disease_trigger = no
+	has_easily_mocked_physical_attribute_trigger = no
+}
+
+can_be_offered_as_concubine_to_character_trigger = {
+	$CHARACTER$ = {
+		trigger_if = {
+			limit = {
+				culture = {
+					has_cultural_tradition = tradition_mwt_unbound_unions
+				}
+			}
+			has_trait = mwt_unbound_unions
+		}
+	}
+
+	is_available_quick = {
+		adult = yes
+		ruler = no
+		advanced_ruler = no
+	}
+	trigger_if = {
+		limit = { NOT = { is_imprisoned_by = $GIVER$ } }
+		is_married = no
+		is_betrothed = no
+		is_diarch = no
+		OR = {
+			is_concubine = no
+			is_concubine_of = $GIVER$
+		}
+		number_of_concubines = 0
+	}
+	trigger_if = {
+		limit = {
+			is_imprisoned_by = $GIVER$
+			is_married = yes
+		}
+		NOR = {
+			is_spouse_of = $CHARACTER$
+			is_spouse_of = $GIVER$
+		}
+	}
+	NOR = {
+		is_concubine_of = $CHARACTER$
+		has_character_flag = has_been_offered_as_concubine
+	}
+	NOT = { is_theocratic_lessee = yes }
+	could_marry_character_trigger = { CHARACTER = $CHARACTER$ }
+}

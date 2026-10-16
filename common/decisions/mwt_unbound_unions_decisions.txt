@@ -1,0 +1,49 @@
+﻿mwt_establish_unbound_unions_tradition_decision = {
+	decision_group_type = major
+
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	}
+
+	desc = mwt_establish_unbound_unions_tradition_decision_desc
+	selection_tooltip = mwt_establish_unbound_unions_tradition_decision_tooltip
+	confirm_text = mwt_establish_unbound_unions_tradition_decision_confirm
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ruler = yes
+		has_trait = mwt_unbound_unions
+		culture = {
+			NOT = { has_cultural_tradition = tradition_mwt_unbound_unions }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_adult = yes
+		is_imprisoned = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			culture = {
+				if = {
+					limit = { has_cultural_tradition = tradition_monogamous }
+					remove_culture_tradition = tradition_monogamous
+				}
+				if = {
+					limit = { has_cultural_tradition = tradition_polygamous }
+					remove_culture_tradition = tradition_polygamous
+				}
+				if = {
+					limit = { has_cultural_tradition = tradition_concubines }
+					remove_culture_tradition = tradition_concubines
+				}
+				add_culture_tradition = tradition_mwt_unbound_unions
+			}
+		}
+	}
+
+	ai_will_do = { base = 0 }
+}
+

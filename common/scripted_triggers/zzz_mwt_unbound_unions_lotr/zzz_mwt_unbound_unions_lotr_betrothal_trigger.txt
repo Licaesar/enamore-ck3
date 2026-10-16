@@ -1,0 +1,56 @@
+﻿# Optional LotR: Realms in Exile compatibility.
+# The zzz directory ensures this definition loads after LotR's own
+# lotr_scripted_triggers/lotr_marriage_triggers.txt definition.
+# Vanilla CK3 does not call this trigger, so it is inert when LotR is absent.
+# The body deliberately uses only vanilla-safe trigger tokens, allowing this
+# same mod package to load cleanly with or without the total conversion.
+can_be_betrothed_trigger = {
+	is_alive = yes
+	NOT = { has_trait_with_flag = can_not_marry }
+	NOT = { has_variable = can_not_marry }
+
+	trigger_if = {
+		limit = { exists = primary_title }
+		NOR = {
+			primary_title = { is_mercenary_company = yes }
+			is_leading_faction_type = peasant_faction
+			is_leading_faction_type = populist_faction
+			government_has_flag = government_is_herder
+		}
+	}
+
+	trigger_if = {
+		limit = { is_clergy = yes }
+		faith = { has_doctrine_parameter = clergy_can_marry }
+	}
+
+	trigger_if = {
+		limit = {
+			exists = liege.involved_activity.var:tournament_marriage_prize
+			this = liege.involved_activity.var:tournament_marriage_prize
+		}
+		exists = scope:contest_winner
+	}
+
+	trigger_if = {
+		limit = { has_trait = mwt_unbound_unions }
+		custom_description = {
+			text = mwt_unbound_unions_spouse_cap_tt
+			any_spouse = { count < 2 }
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			culture = {
+				has_cultural_tradition = tradition_mwt_unbound_unions
+			}
+		}
+		custom_description = {
+			text = mwt_unbound_unions_trait_required_for_secondary_spouse_tt
+			any_spouse = { count < 1 }
+		}
+	}
+	trigger_else = {
+		allowed_more_spouses = yes
+	}
+}

@@ -1,0 +1,8 @@
+﻿fmp_can_marry_actor_trigger = {
+	is_imprisoned_by = scope:actor
+	NOT = { is_spouse_of = scope:actor }
+	is_adult = yes
+	NOT = { has_trait = eunuch_1 }
+	NOT = { has_trait = beardless_eunuch }
+	NOT = { has_trait = order_member }
+}

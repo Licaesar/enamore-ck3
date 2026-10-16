@@ -1,0 +1,22 @@
+﻿l_english:
+    # 角色互动
+    impregnate_interaction:0 "Impregnate Captive"
+    impregnate_interaction_desc:0 "Force your female captive to bear your child."
+    
+    # 强制结合事件
+    impregnate_events.1.title:0 "Forced Union"
+    impregnate_events.1.desc:0 "You order your guards to bring the female captive to your chambers. Whether she wills it or not, after tonight, she may carry your blood in her womb."
+    impregnate_events.1.desc.pleasure:0 "You have her brought before you once more. This time, she does not struggle. She keeps her head lowered, refusing to meet your gaze, yet when your hand brushes her waist, her breath falters. She bites her lip, as if trying to resist the familiar sensation, but her body trembles beyond her control. She hates herself for this, hates that her body has already memorized you. You lean close and whisper against her ear, and she shuts her eyes — a flush of shame spreads from her neck to the tips of her ears. Whether she denies it or not, after tonight, she may carry your blood once more."
+    impregnate_events.1.option:0 "You have no say in this."
+    
+    # 好感修正
+    forced_interaction_negative:0 "Forced Union"
+    forced_interaction_positive:0 "Unexpected Passion"
+    
+    # 未婚生子消息通知
+    impregnate_toast.title:0 "Birth of a Bastard"
+    impregnate_toast.desc:0 "Your female captive has borne you a child. The world does not know you are the father, but this secret will remain in your heart forever."
+
+    # 冷却修正
+    impregnate_cooldown_mod:0 "Afterglow"
+    impregnate_interaction_cooldown:0 "Afterglow — cannot be taken again for 30 days."

@@ -1,0 +1,158 @@
+namespace = impregnate_events
+
+# ============================================================
+# 强制结合事件
+# ============================================================
+impregnate_events.1 = {
+    type = character_event
+    title = impregnate_events.1.title
+
+    #文案：第一次强制默认，第二次起才可能显示食髓文案
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = { 
+                    NOT = { has_variable = first_time_impregnate }
+                    scope:target_captive = { has_character_flag = forced_positive_relation } 
+                }
+                desc = impregnate_events.1.desc.pleasure
+            }
+            desc = impregnate_events.1.desc
+        }
+    }
+
+    theme = intrigue
+
+    # 左侧玩家，右侧俘虏
+    left_portrait = {
+        character = root
+        animation = scheme
+    }
+
+    # 右侧俘虏：根据状态切换动作
+    right_portrait = {
+        character = scope:target_captive
+
+        # 1. 食髓知味（+100好感）：羞愧
+        triggered_animation = {
+            trigger = { has_character_flag = forced_positive_relation }
+            animation = shame
+        }
+
+        # 2. 受辱怀恨（-100好感）：地牢
+        triggered_animation = {
+            trigger = {
+                has_opinion_modifier = {
+                    modifier = forced_interaction_negative
+                    target = root
+                }
+            }
+            animation = prisondungeon
+        }
+
+        # 3. 默认（第一次互动）：恐惧
+        animation = fear
+    }
+
+    immediate = {
+        # 0. 判断是否是第一次互动，并记录临时变量
+        if = {
+            limit = { NOT = { scope:target_captive = { has_character_flag = impregnate_interacted } } }
+            set_variable = { name = first_time_impregnate value = yes }
+            scope:target_captive = { add_character_flag = impregnate_interacted }
+        }
+
+        # 1. 挂上30天独立冷却
+        scope:target_captive = {
+            add_character_modifier = {
+                modifier = impregnate_cooldown_mod
+                days = 30
+            }
+        }
+
+        # 2. 怀孕概率判定（固定60%）
+        if = {
+            limit = { scope:target_captive = { is_pregnant = no } }
+
+            random = {
+                chance = 60
+                scope:target_captive = {
+                    make_pregnant = { father = root }
+                    add_character_flag = force_bred_by_player
+                }
+            }
+        }
+
+        # 3. 好感变化（一旦+100永久锁定好状态）
+        if = {
+            limit = { NOT = { scope:target_captive = { has_character_flag = forced_positive_relation } } }
+            random_list = {
+                80 = {
+                    scope:target_captive = {
+                        remove_opinion = { modifier = forced_interaction_positive target = root }
+                        add_opinion = { modifier = forced_interaction_negative target = root }
+                    }
+                }
+                20 = {
+                    scope:target_captive = {
+                        remove_opinion = { modifier = forced_interaction_negative target = root }
+                        add_opinion = { modifier = forced_interaction_positive target = root }
+                        add_character_flag = forced_positive_relation
+                        random = { chance = 50 add_lover = root }
+                    }
+                }
+            }
+        }
+    }
+
+    #事件结束后清除临时变量
+    after = {
+        if = {
+            limit = { has_variable = first_time_impregnate }
+            remove_variable = first_time_impregnate
+        }
+    }
+
+    option = { name = impregnate_events.1.option }
+}
+
+# ============================================================
+# 出生分流事件（隐藏）—— 仅处理未婚俘虏的提示
+# ============================================================
+impregnate_events.2 = {
+    type = character_event
+    hidden = yes
+
+    trigger = {
+        exists = mother
+        exists = real_father
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                real_father = { is_ai = no }
+                mother = {
+                    OR = {
+                        has_character_flag = force_bred_by_player
+                        is_imprisoned_by = real_father
+                    }
+                }
+            }
+
+            mother = { remove_character_flag = force_bred_by_player }
+
+            # 未婚俘虏生子，给玩家发轻量提示
+            if = {
+                limit = { mother = { is_married = no } }
+                real_father = {
+                    send_interface_toast = {
+                        type = event_toast_effect_neutral
+                        title = impregnate_toast.title
+                        desc = impregnate_toast.desc
+                    }
+                }
+            }
+        }
+    }
+}

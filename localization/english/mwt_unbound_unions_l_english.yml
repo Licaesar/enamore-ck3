@@ -1,0 +1,13 @@
+﻿l_english:
+ trait_mwt_unbound_unions:0 "Unbound Unions"
+ trait_mwt_unbound_unions_desc:0 "This character treats the marriage customs of faith and culture as guidance rather than law. They may have up to two [spouses|E] and three [concubines|E], regardless of whether their faith or culture normally permits those forms of union."
+ mwt_unbound_unions_spouse_cap_tt:0 "A character with [GetTrait('mwt_unbound_unions').GetName( GetNullCharacter )] must have fewer than two [spouses|E]"
+ mwt_unbound_unions_concubine_cap_tt:0 "A character with [GetTrait('mwt_unbound_unions').GetName( GetNullCharacter )] must have fewer than three [concubines|E]"
+ mwt_unbound_unions_trait_required_for_secondary_spouse_tt:0 "Without [GetTrait('mwt_unbound_unions').GetName( GetNullCharacter )], a member of this culture may not take a secondary [spouse|E]"
+ tradition_mwt_unbound_unions_name:0 "Unbound Union Customs"
+ tradition_mwt_unbound_unions_desc:0 "This culture recognizes exceptional household arrangements only for rulers who bear the Unbound Unions trait. Such rulers may have up to two spouses and three concubines, irrespective of their faith's usual form of marriage; culture members without the trait remain limited to one spouse and may not take concubines under this custom."
+ mwt_unbound_unions_tradition_requires_trait_tt:0 "The reforming character must have the [GetTrait('mwt_unbound_unions').GetName( GetNullCharacter )] trait"
+ mwt_establish_unbound_unions_tradition_decision:0 "Establish Unbound Union Customs"
+ mwt_establish_unbound_unions_tradition_decision_desc:0 "The marriage finder follows cultural custom more strictly than individual privilege. I can formally establish a custom that lets rulers with the Unbound Unions trait have two spouses and three concubines, while denying that privilege to culture members without the trait."
+ mwt_establish_unbound_unions_tradition_decision_tooltip:0 "Replace this culture's existing marriage tradition, if any, with Unbound Union Customs"
+ mwt_establish_unbound_unions_tradition_decision_confirm:0 "Establish the Custom"

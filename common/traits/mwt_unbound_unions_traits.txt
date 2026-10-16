@@ -1,0 +1,11 @@
+﻿# Unbound Unions
+# Gameplay is implemented by the late-loading scripted trigger overrides in
+# common/scripted_triggers/zz_mwt_unbound_unions_marriage_triggers.txt.
+
+mwt_unbound_unions = {
+	icon = seducer.dds
+
+	shown_in_encyclopedia = yes
+	shown_in_ruler_designer = yes
+	ruler_designer_cost = 20
+}

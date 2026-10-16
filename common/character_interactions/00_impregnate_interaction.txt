@@ -1,0 +1,39 @@
+impregnate_interaction = {
+    category = interaction_category_prison
+    icon = pregnant
+    desc = impregnate_interaction_desc
+    
+    on_accept = {
+        scope:recipient = { save_scope_as = target_captive }
+        scope:actor = {
+            trigger_event = {
+                id = impregnate_events.1
+                days = 0
+            }
+        }
+    }
+    
+    is_shown = {
+        scope:actor = { is_ai = no }
+        scope:recipient = { 
+            is_female = yes 
+            is_imprisoned_by = scope:actor 
+            is_adult = yes
+        }
+    }
+    
+    is_valid_showing_failures_only = {
+        scope:actor = { 
+            is_male = yes 
+            is_fertile = yes
+        }
+        scope:recipient = { 
+            is_fertile = yes
+            is_pregnant = no
+            NOT = { has_character_modifier = impregnate_cooldown_mod }
+        }
+    }
+    
+    target_type = character
+    auto_accept = yes
+}

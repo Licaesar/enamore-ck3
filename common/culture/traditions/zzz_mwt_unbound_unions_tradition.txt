@@ -1,0 +1,55 @@
+﻿# The normal marriage candidate window uses these hardcoded cultural
+# parameters before it evaluates scripted marriage triggers.
+
+tradition_mwt_unbound_unions = {
+	category = ritual
+
+	layers = {
+		0 = diplo
+		1 = mena
+		4 = temple.dds
+	}
+
+	can_pick = {
+		custom_tooltip = {
+			text = mwt_unbound_unions_tradition_requires_trait_tt
+			scope:character = { has_trait = mwt_unbound_unions }
+		}
+		custom_tooltip = {
+			text = only_one_marriage_tradition_allowed
+			trigger_if = {
+				limit = {
+					OR = {
+						NOT = { exists = scope:replacing }
+						NOR = {
+							scope:replacing = culture_tradition:tradition_monogamous
+							scope:replacing = culture_tradition:tradition_polygamous
+							scope:replacing = culture_tradition:tradition_concubines
+						}
+					}
+				}
+				NOR = {
+					culture_tradition:tradition_monogamous = { is_in_list = traits }
+					culture_tradition:tradition_polygamous = { is_in_list = traits }
+					culture_tradition:tradition_concubines = { is_in_list = traits }
+				}
+			}
+		}
+	}
+
+	can_pick_for_hybridization = {
+		scope:character = { has_trait = mwt_unbound_unions }
+		NOR = {
+			culture_tradition:tradition_monogamous = { is_in_list = traits }
+			culture_tradition:tradition_polygamous = { is_in_list = traits }
+			culture_tradition:tradition_concubines = { is_in_list = traits }
+		}
+	}
+
+	parameters = {
+		number_of_spouses = 2
+		number_of_consorts = 3
+	}
+
+	ai_will_do = { value = 0 }
+}

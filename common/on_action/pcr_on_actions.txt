@@ -1,0 +1,11 @@
+﻿# Anexa o on_action próprio ao vanilla sem substituir os eventos dele
+on_birth_child = {
+	on_actions = { pcr_on_birth_child }
+}
+
+# root: o recém-nascido
+pcr_on_birth_child = {
+	events = {
+		pcr_impregnate.0002
+	}
+}

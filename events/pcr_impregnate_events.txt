@@ -94,7 +94,7 @@ pcr_impregnate.0001 = {
 						remove_opinion = { modifier = pcr_forced_union_negative_opinion target = root }
 						add_opinion = { modifier = pcr_forced_union_positive_opinion target = root }
 						add_character_flag = pcr_forced_positive_relation
-						random = { chance = 50 add_lover = root }
+						random = { chance = 50 set_relation_lover = root }
 					}
 				}
 			}
@@ -112,6 +112,7 @@ pcr_impregnate.0001 = {
 }
 
 # Nascimento do filho de uma prisioneira solteira: aviso ao jogador (oculto)
+# Chamado por pcr_on_birth_child; root é o recém-nascido
 pcr_impregnate.0002 = {
 	type = character_event
 	hidden = yes

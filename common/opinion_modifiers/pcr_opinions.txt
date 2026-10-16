@@ -22,7 +22,6 @@ pcr_forced_union_negative_opinion = {
 	opinion = -100
 	max = -100
 	min = -100
-	decay = 0
 	months = 120
 }
 
@@ -30,6 +29,5 @@ pcr_forced_union_positive_opinion = {
 	opinion = 100
 	max = 100
 	min = 100
-	decay = 0
 	months = 120
 }

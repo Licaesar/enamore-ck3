@@ -3,7 +3,8 @@
  # Casamento forçado
  pcr_force_marriage_interaction:0 "Forcefully Marry Prisoner"
  pcr_force_marriage_interaction_desc:0 "Forcefully marry [recipient.GetShortUINameNoTooltip] to someone in your court."
- actor_secondary_pcr_force_marriage_interaction:0 "Sender"
+ actor_secondary_pcr_force_marriage_interaction:0 "[spouse|E]"
+ recipient_secondary_pcr_force_marriage_interaction:0 "[spouse|E]"
 
  pcr_rightful_spouse_opinion:0 "Rightful Spouse"
  pcr_stole_my_wife_opinion:0 "Wife Stealer"

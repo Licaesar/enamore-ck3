@@ -25,23 +25,22 @@ pcr_establish_unbound_unions_decision = {
 		is_imprisoned = no
 	}
 
+	# Troca a tradição de casamento atual da cultura pela das Uniões Livres
 	effect = {
-		show_as_tooltip = {
-			culture = {
-				if = {
-					limit = { has_cultural_tradition = tradition_monogamous }
-					remove_culture_tradition = tradition_monogamous
-				}
-				if = {
-					limit = { has_cultural_tradition = tradition_polygamous }
-					remove_culture_tradition = tradition_polygamous
-				}
-				if = {
-					limit = { has_cultural_tradition = tradition_concubines }
-					remove_culture_tradition = tradition_concubines
-				}
-				add_culture_tradition = tradition_pcr_unbound_unions
+		culture = {
+			if = {
+				limit = { has_cultural_tradition = tradition_monogamous }
+				remove_culture_tradition = tradition_monogamous
 			}
+			if = {
+				limit = { has_cultural_tradition = tradition_polygamous }
+				remove_culture_tradition = tradition_polygamous
+			}
+			if = {
+				limit = { has_cultural_tradition = tradition_concubines }
+				remove_culture_tradition = tradition_concubines
+			}
+			add_culture_tradition = tradition_pcr_unbound_unions
 		}
 	}
 

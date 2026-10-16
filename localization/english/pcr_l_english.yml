@@ -25,8 +25,6 @@
  pcr_impregnate_birth_toast:0 "Birth of a Bastard"
  pcr_impregnate_birth_toast_desc:0 "Your female captive has borne you a child. The world does not know you are the father, but this secret will remain in your heart forever."
 
- pcr_impregnate_cooldown_modifier:0 "Afterglow"
-
  # Uniões Livres
  trait_pcr_unbound_unions:0 "Unbound Unions"
  trait_pcr_unbound_unions_desc:0 "This character treats the marriage customs of faith and culture as guidance rather than law. They may have up to two [spouses|E] and three [concubines|E], regardless of whether their faith or culture normally permits those forms of union."

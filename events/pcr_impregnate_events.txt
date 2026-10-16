@@ -10,7 +10,7 @@ pcr_impregnate.0001 = {
 		first_valid = {
 			triggered_desc = {
 				trigger = {
-					NOT = { has_variable = pcr_first_time_impregnate }
+					NOT = { exists = scope:pcr_first_time }
 					scope:target_captive = { has_character_flag = pcr_forced_positive_relation }
 				}
 				desc = pcr_impregnate.0001.desc_pleasure
@@ -54,16 +54,8 @@ pcr_impregnate.0001 = {
 		# Marca a primeira vez
 		if = {
 			limit = { NOT = { scope:target_captive = { has_character_flag = pcr_impregnate_interacted } } }
-			set_variable = { name = pcr_first_time_impregnate value = yes }
+			save_scope_value_as = { name = pcr_first_time value = yes }
 			scope:target_captive = { add_character_flag = pcr_impregnate_interacted }
-		}
-
-		# Cooldown de 30 dias
-		scope:target_captive = {
-			add_character_modifier = {
-				modifier = pcr_impregnate_cooldown_modifier
-				days = 30
-			}
 		}
 
 		# 60% de chance de gravidez
@@ -101,13 +93,6 @@ pcr_impregnate.0001 = {
 		}
 	}
 
-	after = {
-		if = {
-			limit = { has_variable = pcr_first_time_impregnate }
-			remove_variable = pcr_first_time_impregnate
-		}
-	}
-
 	option = { name = pcr_impregnate.0001.a }
 }
 
@@ -119,13 +104,12 @@ pcr_impregnate.0002 = {
 
 	trigger = {
 		exists = mother
-		exists = real_father
+		real_father ?= { is_ai = no }
 	}
 
 	immediate = {
 		if = {
 			limit = {
-				real_father = { is_ai = no }
 				mother = {
 					OR = {
 						has_character_flag = pcr_force_bred_by_player

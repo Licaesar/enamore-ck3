@@ -4,7 +4,7 @@
 pcr_force_marriage_interaction = {
 	common_interaction = yes
 
-	category = interaction_category_diplomacy
+	category = interaction_category_prison
 
 	desc = pcr_force_marriage_interaction_desc
 
@@ -18,13 +18,14 @@ pcr_force_marriage_interaction = {
 		}
 	}
 
-	# Candidatos do lado do captor: ele mesmo, os cortesãos e os filhos
+	# Candidatos do lado do captor: ele mesmo, os cortesãos e os filhos.
+	# can_marry_trigger respeita o limite do traço pcr_unbound_unions.
 	populate_actor_list = {
 		scope:actor = {
 			if = {
 				limit = {
 					sex_opposite_of = scope:recipient
-					allowed_more_spouses = yes
+					can_marry_trigger = yes
 					# A fé permite este grau de parentesco
 					OR = {
 						NOT = { is_close_or_extended_family_of = scope:recipient }
@@ -47,7 +48,7 @@ pcr_force_marriage_interaction = {
 			every_courtier = {
 				limit = {
 					is_at_home = yes
-					allowed_more_spouses = yes
+					can_marry_trigger = yes
 					sex_opposite_of = scope:recipient
 					NOT = { is_spouse_of = scope:recipient }
 					# A fé permite este grau de parentesco
@@ -72,7 +73,7 @@ pcr_force_marriage_interaction = {
 			every_child = {
 				limit = {
 					NOT = { is_in_list = characters }
-					allowed_more_spouses = yes
+					can_marry_trigger = yes
 					sex_opposite_of = scope:recipient
 					NOT = { is_spouse_of = scope:recipient }
 					# A fé permite este grau de parentesco
@@ -119,7 +120,6 @@ pcr_force_marriage_interaction = {
 
 	is_shown = {
 		scope:recipient = {
-			is_imprisoned_by = scope:actor
 			pcr_can_force_marry_trigger = yes
 		}
 	}
@@ -168,9 +168,10 @@ pcr_impregnate_interaction = {
 		scope:recipient = {
 			fertility > 0
 			is_pregnant = no
-			NOT = { has_character_modifier = pcr_impregnate_cooldown_modifier }
 		}
 	}
+
+	cooldown_against_recipient = { days = 30 }
 
 	auto_accept = yes
 }

@@ -12,7 +12,7 @@ can_marry_trigger = {
 		limit = { has_trait = pcr_unbound_unions }
 		custom_description = {
 			text = pcr_unbound_unions_spouse_cap_tt
-			any_spouse = { count < 2 }
+			any_spouse = { count < 10 }
 		}
 	}
 	trigger_else_if = {

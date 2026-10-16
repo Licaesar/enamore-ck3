@@ -46,7 +46,8 @@ tradition_pcr_unbound_unions = {
 		}
 	}
 
-	parameters = {
+	# Na 1.20 o limite de cônjuges e concubinas fica em partners (substitui o da fé)
+	partners = {
 		number_of_spouses = 2
 		number_of_consorts = 3
 	}

@@ -77,6 +77,7 @@ O mod foi refeito a partir de quatro mods de outros autores, que estavam mistura
 | `events/pcr_impregnate_events.txt` | Evento da gravidez forçada e aviso de nascimento |
 | `events/pcr_orgy_events.txt` | Eventos da orgia do harém |
 | `gui/pcr_orgy_panel.gui` | Painel de retratos das participantes |
+| `gui/scripted_widgets/pcr_orgy_widgets.txt` | Registra o painel para o jogo criá-lo na inicialização |
 | `gfx/interface/illustrations/decisions/pcr_decision_orgy.dds` | Ilustração da decisão |
 | `gui/window_character.gui` | Ficha de personagem com a linha de esposas no estilo das concubinas |
 | `localization/english/pcr_l_english.yml` | Localização |

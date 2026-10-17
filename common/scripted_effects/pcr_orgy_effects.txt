@@ -1,0 +1,386 @@
+﻿# Orgia do harém. Escopo salvo em todo o fluxo: scope:pcr_orgy_father = o jogador.
+# Variáveis no jogador: lista pcr_orgy_partners (participantes), pcr_orgy_partner_count
+# (tamanho da lista) e pcr_show_orgy_panel (liga o painel de retratos).
+
+# Marca o personagem como nu (flag lido por mods de retrato). Se já estava nu,
+# guarda isso para não vesti-lo depois.
+pcr_orgy_undress_effect = {
+	if = {
+		limit = { NOT = { has_character_flag = is_naked } }
+		# O prazo evita que o personagem fique nu para sempre se algo falhar
+		add_character_flag = {
+			flag = is_naked
+			days = 2
+		}
+	}
+	else = {
+		add_character_flag = {
+			flag = pcr_orgy_was_naked
+			days = 2
+		}
+	}
+}
+
+pcr_orgy_dress_effect = {
+	if = {
+		limit = { has_character_flag = pcr_orgy_was_naked }
+		remove_character_flag = pcr_orgy_was_naked
+	}
+	else = {
+		remove_character_flag = is_naked
+	}
+}
+
+# Escopo: o jogador. Lista as participantes, escolhe as duas que aparecem no evento
+# (favorita e segunda) e as despe.
+# Favorita: alma gêmea, depois amante, depois qualquer participante.
+pcr_orgy_prepare_effect = {
+	clear_variable_list = pcr_orgy_partners
+	set_variable = {
+		name = pcr_orgy_partner_count
+		value = 0
+	}
+
+	every_consort = {
+		limit = { pcr_orgy_valid_partner_trigger = yes }
+		scope:pcr_orgy_father = {
+			add_to_variable_list = {
+				name = pcr_orgy_partners
+				target = prev
+			}
+			change_variable = {
+				name = pcr_orgy_partner_count
+				add = 1
+			}
+		}
+	}
+	set_variable = pcr_show_orgy_panel
+
+	if = {
+		limit = {
+			any_consort = {
+				pcr_orgy_valid_partner_trigger = yes
+				has_relation_soulmate = scope:pcr_orgy_father
+			}
+		}
+		random_consort = {
+			limit = {
+				pcr_orgy_valid_partner_trigger = yes
+				has_relation_soulmate = scope:pcr_orgy_father
+			}
+			save_scope_as = pcr_orgy_favorite
+		}
+	}
+	else_if = {
+		limit = {
+			any_consort = {
+				pcr_orgy_valid_partner_trigger = yes
+				has_relation_lover = scope:pcr_orgy_father
+			}
+		}
+		random_consort = {
+			limit = {
+				pcr_orgy_valid_partner_trigger = yes
+				has_relation_lover = scope:pcr_orgy_father
+			}
+			save_scope_as = pcr_orgy_favorite
+		}
+	}
+	else = {
+		random_consort = {
+			limit = { pcr_orgy_valid_partner_trigger = yes }
+			save_scope_as = pcr_orgy_favorite
+		}
+	}
+
+	random_consort = {
+		limit = {
+			pcr_orgy_valid_partner_trigger = yes
+			NOT = { this = scope:pcr_orgy_favorite }
+		}
+		save_scope_as = pcr_orgy_second
+	}
+
+	pcr_orgy_undress_effect = yes
+	scope:pcr_orgy_favorite = { pcr_orgy_undress_effect = yes }
+	if = {
+		limit = { exists = scope:pcr_orgy_second }
+		scope:pcr_orgy_second = { pcr_orgy_undress_effect = yes }
+	}
+}
+
+# Escopo: o jogador, na opção do evento. Aplica tudo e limpa as variáveis.
+pcr_orgy_resolve_effect = {
+	pcr_orgy_player_effect = yes
+
+	every_in_list = {
+		variable = pcr_orgy_partners
+		pcr_orgy_try_conception_effect = yes
+		pcr_orgy_participant_effect = yes
+		scope:pcr_orgy_father = { pcr_orgy_player_per_partner_effect = yes }
+	}
+
+	pcr_orgy_dress_effect = yes
+	scope:pcr_orgy_favorite = { pcr_orgy_dress_effect = yes }
+	if = {
+		limit = { exists = scope:pcr_orgy_second }
+		scope:pcr_orgy_second = { pcr_orgy_dress_effect = yes }
+	}
+
+	remove_variable = was_lustful_before_pcr_orgy
+	remove_variable = pcr_show_orgy_panel
+	remove_variable = pcr_orgy_partner_count
+	clear_variable_list = pcr_orgy_partners
+}
+
+# Escopo: a participante. A concepção usa a fertilidade dos dois.
+pcr_orgy_try_conception_effect = {
+	if = {
+		limit = {
+			is_pregnant = no
+			pcr_orgy_valid_partner_trigger = yes
+		}
+		random = {
+			chance = pcr_orgy_conception_chance
+			# Impede que a regra de gravidez realista do Love Marriage encerre a
+			# gravidez; sem esse mod, o flag não faz nada.
+			add_character_flag = {
+				flag = allow_event_pregnancy
+				days = 61
+			}
+			make_pregnant = {
+				father = scope:pcr_orgy_father
+			}
+		}
+	}
+}
+
+# Escopo: qualquer personagem
+pcr_orgy_satisfied_desire_effect = {
+	add_character_modifier = {
+		modifier = pcr_orgy_satisfied_desire_modifier
+		years = 1
+	}
+}
+
+# Escopo: o jogador, uma vez
+pcr_orgy_player_effect = {
+	pcr_orgy_satisfied_desire_effect = yes
+
+	# Lembra se já era Lustful, para só dar o bônus de estresse a quem já era
+	if = {
+		limit = { has_trait = lustful }
+		set_variable = was_lustful_before_pcr_orgy
+	}
+
+	# Chaste: +25 de estresse
+	if = {
+		limit = { has_trait = chaste }
+		add_stress = 25
+	}
+
+	# Quem não é Chaste nem Lustful: 33% de ficar Lustful
+	if = {
+		limit = {
+			NOT = { has_trait = chaste }
+			NOT = { has_trait = lustful }
+		}
+		random = {
+			chance = 33
+			add_trait = lustful
+		}
+	}
+
+	# Chaste: 25% de perder Chaste, ficar Lustful e aliviar 100 de estresse
+	if = {
+		limit = { has_trait = chaste }
+		random = {
+			chance = 25
+			remove_trait = chaste
+			if = {
+				limit = { NOT = { has_trait = lustful } }
+				add_trait = lustful
+			}
+			add_stress = -100
+		}
+	}
+
+	# Ficou Lustful agora: -5 de estresse, uma vez
+	if = {
+		limit = {
+			has_trait = lustful
+			NOT = { has_variable = was_lustful_before_pcr_orgy }
+		}
+		add_stress = -5
+	}
+
+	if = {
+		limit = { has_trait = shy }
+		add_stress = 25
+	}
+}
+
+# Escopo: o jogador, uma vez por participante
+pcr_orgy_player_per_partner_effect = {
+	add_stress = -10
+	add_intrigue_lifestyle_xp = 50
+
+	# Já era Lustful antes da orgia
+	if = {
+		limit = { has_variable = was_lustful_before_pcr_orgy }
+		add_stress = -5
+	}
+
+	if = {
+		limit = { has_trait = seducer }
+		add_prestige = 20
+		add_stress = -5
+	}
+
+	if = {
+		limit = { has_trait = gregarious }
+		add_stress = -5
+	}
+
+	# 5% de ganhar 1 ponto permanente de Prowess, a cada participante
+	random = {
+		chance = 5
+		add_prowess_skill = 1
+	}
+}
+
+# Escopo: a participante
+pcr_orgy_participant_effect = {
+	pcr_orgy_satisfied_desire_effect = yes
+
+	if = {
+		limit = { has_trait = lustful }
+		set_variable = was_lustful_before_pcr_orgy
+	}
+
+	# Chaste: +25 de estresse; as outras: -25
+	if = {
+		limit = { has_trait = chaste }
+		add_stress = 25
+	}
+	else = {
+		add_stress = -25
+	}
+
+	# Quem não é amante nem alma gêmea do jogador: 50% de virar amante
+	if = {
+		limit = {
+			NOT = { has_relation_lover = scope:pcr_orgy_father }
+			NOT = { has_relation_soulmate = scope:pcr_orgy_father }
+		}
+		random = {
+			chance = 50
+			set_relation_lover = scope:pcr_orgy_father
+		}
+	}
+
+	if = {
+		limit = {
+			NOT = { has_trait = chaste }
+			NOT = { has_trait = lustful }
+		}
+		random = {
+			chance = 33
+			add_trait = lustful
+		}
+	}
+
+	if = {
+		limit = { has_trait = chaste }
+		random = {
+			chance = 25
+			remove_trait = chaste
+			if = {
+				limit = { NOT = { has_trait = lustful } }
+				add_trait = lustful
+			}
+			add_stress = -100
+		}
+	}
+
+	if = {
+		limit = {
+			has_trait = lustful
+			NOT = { has_variable = was_lustful_before_pcr_orgy }
+		}
+		add_stress = -5
+	}
+
+	if = {
+		limit = { has_trait = shy }
+		add_stress = 25
+	}
+
+	# Já era Lustful ou é Gregarious: -5 de estresse por participante
+	if = {
+		limit = { has_variable = was_lustful_before_pcr_orgy }
+		add_stress = {
+			value = scope:pcr_orgy_father.var:pcr_orgy_partner_count
+			multiply = -5
+		}
+	}
+	if = {
+		limit = { has_trait = gregarious }
+		add_stress = {
+			value = scope:pcr_orgy_father.var:pcr_orgy_partner_count
+			multiply = -5
+		}
+	}
+
+	# 25% de criar amizade ou rivalidade (50/50) com outra participante
+	random = {
+		chance = 25
+		save_scope_as = pcr_orgy_social_actor
+		# Evita sobra do escopo da participante anterior
+		clear_saved_scope = pcr_orgy_social_target
+		scope:pcr_orgy_father = {
+			random_in_list = {
+				variable = pcr_orgy_partners
+				limit = {
+					NOT = { this = scope:pcr_orgy_social_actor }
+					NOT = { has_relation_friend = scope:pcr_orgy_social_actor }
+					NOT = { has_relation_rival = scope:pcr_orgy_social_actor }
+				}
+				save_scope_as = pcr_orgy_social_target
+			}
+		}
+		if = {
+			limit = { exists = scope:pcr_orgy_social_target }
+			scope:pcr_orgy_social_actor = {
+				random_list = {
+					50 = { set_relation_friend = scope:pcr_orgy_social_target }
+					50 = { set_relation_rival = scope:pcr_orgy_social_target }
+				}
+			}
+		}
+	}
+
+	# Opinião sobre o jogador, por 5 anos
+	if = {
+		limit = { has_relation_soulmate = scope:pcr_orgy_father }
+		add_opinion = {
+			target = scope:pcr_orgy_father
+			modifier = pcr_orgy_soulmate_opinion
+		}
+	}
+	else_if = {
+		limit = { has_relation_lover = scope:pcr_orgy_father }
+		add_opinion = {
+			target = scope:pcr_orgy_father
+			modifier = pcr_orgy_lover_opinion
+		}
+	}
+	else = {
+		add_opinion = {
+			target = scope:pcr_orgy_father
+			modifier = pcr_orgy_participant_opinion
+		}
+	}
+
+	remove_variable = was_lustful_before_pcr_orgy
+}

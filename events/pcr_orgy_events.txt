@@ -1,0 +1,93 @@
+﻿# Orgia do harém (decisão pcr_harem_orgy_decision)
+namespace = pcr_orgy
+
+# Escolhe a versão do evento: com duas ou mais participantes (0002) ou com uma só (0003)
+pcr_orgy.0001 = {
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				any_consort = {
+					count >= 2
+					pcr_orgy_valid_partner_trigger = yes
+				}
+			}
+			trigger_event = pcr_orgy.0002
+		}
+		else_if = {
+			limit = {
+				any_consort = { pcr_orgy_valid_partner_trigger = yes }
+			}
+			trigger_event = pcr_orgy.0003
+		}
+	}
+}
+
+# Duas ou mais participantes: a favorita e outra aparecem no retrato
+pcr_orgy.0002 = {
+	type = character_event
+	title = pcr_orgy.0002.t
+	desc = pcr_orgy.0002.desc
+	theme = seduction
+	override_background = bedchamber
+
+	left_portrait = {
+		character = scope:pcr_orgy_second
+		animation = flirtation
+	}
+	right_portrait = {
+		character = scope:pcr_orgy_favorite
+		animation = admiration
+	}
+	lower_center_portrait = {
+		character = root
+		animation = happiness
+	}
+
+	immediate = {
+		save_scope_as = pcr_orgy_father
+		pcr_orgy_prepare_effect = yes
+	}
+
+	option = {
+		name = pcr_orgy.0002.a
+
+		custom_tooltip = pcr_orgy_event_effects_tt
+		hidden_effect = {
+			pcr_orgy_resolve_effect = yes
+		}
+	}
+}
+
+# Uma só participante
+pcr_orgy.0003 = {
+	type = character_event
+	title = pcr_orgy.0003.t
+	desc = pcr_orgy.0003.desc
+	theme = seduction
+	override_background = bedchamber
+
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:pcr_orgy_favorite
+		animation = admiration
+	}
+
+	immediate = {
+		save_scope_as = pcr_orgy_father
+		pcr_orgy_prepare_effect = yes
+	}
+
+	option = {
+		name = pcr_orgy.0003.a
+
+		custom_tooltip = pcr_orgy_event_effects_tt
+		hidden_effect = {
+			pcr_orgy_resolve_effect = yes
+		}
+	}
+}

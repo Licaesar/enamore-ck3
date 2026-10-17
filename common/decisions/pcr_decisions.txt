@@ -82,3 +82,61 @@ pcr_adopt_enamore_decision = {
 
 	ai_will_do = { base = 0 }
 }
+
+# Orgia do harém: reúne as consortes elegíveis (cônjuges e concubinas) em um evento.
+# Só o jogador usa; custa 10 de piedade por participante.
+pcr_harem_orgy_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/pcr_decision_orgy.dds"
+	}
+
+	desc = pcr_harem_orgy_decision_desc
+	selection_tooltip = pcr_harem_orgy_decision_tooltip
+	confirm_text = pcr_harem_orgy_decision_confirm
+
+	cooldown = { days = 720 }
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		is_adult = yes
+		is_female = no
+	}
+
+	is_valid_showing_failures_only = {
+		custom_tooltip = {
+			text = pcr_harem_orgy_requirement_available_tt
+			is_available = yes
+		}
+	}
+
+	is_valid = {
+		custom_tooltip = {
+			text = pcr_harem_orgy_requirement_partner_tt
+			any_consort = {
+				pcr_orgy_valid_partner_trigger = yes
+			}
+		}
+	}
+
+	cost = {
+		piety = pcr_orgy_piety_cost
+	}
+
+	effect = {
+		custom_tooltip = pcr_harem_orgy_decision_effect_tt
+
+		# O evento 0001 escolhe a versão com duas ou com uma participante
+		hidden_effect = {
+			trigger_event = {
+				id = pcr_orgy.0001
+				days = 5
+			}
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+}

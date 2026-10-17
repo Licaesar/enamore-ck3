@@ -50,3 +50,30 @@
  pcr_concubine_parent_house_renown_tt:0 "Your [dynasty|E] needs at least 10 [renown|E]"
  pcr_concubine_parent_house_lowborn_tt:0 "[recipient.GetShortUINameNoTooltip|U]'s concubine parent is [lowborn|E]"
  pcr_concubine_parent_house_same_tt:0 "[recipient.GetShortUINameNoTooltip|U] already belongs to the [house|E] of [recipient.GetHerHis] concubine parent"
+
+ # Orgia do harém
+ pcr_harem_orgy_decision:0 "Host a Harem Orgy"
+ pcr_harem_orgy_decision_desc:0 "Gather the women of your household for a night devoted entirely to pleasure. Such an indulgence may strengthen bonds, ignite new passions, soothe troubled minds, or create unexpected rivalries among those involved."
+ pcr_harem_orgy_decision_tooltip:0 "Gather your eligible consorts for an intimate celebration."
+ pcr_harem_orgy_decision_confirm:0 "Let the festivities begin"
+ pcr_harem_orgy_requirement_available_tt:0 "You must be available to host the gathering."
+ pcr_harem_orgy_requirement_partner_tt:0 "You must have at least one eligible spouse or concubine aged 50 or younger who is not pregnant, imprisoned or nursing a child under one year old."
+ pcr_harem_orgy_decision_effect_tt:0 "The gathering will begin in 5 days.\n\n#high Expected Effects#!\nYour benefits and the experiences of your participants will scale with the number of eligible consorts attending.\n\nEach eligible participant increases the [piety|E] cost by #N 10#!."
+
+ pcr_orgy_participants_title:0 "Participants"
+ pcr_orgy_event_effects_tt:0 "#high Effects of the Orgy#!\n\n#high You#!\n• Lose #P 10 Stress#! and gain #P 50 Intrigue Lifestyle Experience#! per participant\n• Each participant gives a #V 5%#! chance of improving your Prowess\n• #P Lustful#!: lose an additional #P 5 Stress#! per participant\n• #P Gregarious#!: lose an additional #P 5 Stress#! per participant\n• #P Seducer#!: gain #P 20 Prestige#! and lose an additional #P 5 Stress#! per participant\n\n#high Participants#!\n• Normally lose #P 25 Stress#!\n• #N Chaste#! participants gain #N 25 Stress#! instead\n• #N Shy#! participants gain #N 25 additional Stress#!\n• #P Gregarious#! participants lose #P 5 Stress#! per participant\n• Participants who were already #P Lustful#! lose #P 5 Stress#! per participant\n• Newly Lustful participants lose #P 5 Stress#! once\n• Participants who are not your Lover have a #V 50%#! chance to become one\n• Non-Chaste participants have a #V 33%#! chance to become Lustful\n• Chaste participants have a #V 25%#! chance to lose Chaste, become Lustful and lose #P 100 Stress#!\n• Each participant has a #V 25%#! chance to form either a Friendship or a Rivalry with another participant\n• Participants gain #P +25 Opinion#! of you, Lovers #P +50#!, and your Soulmate #P +100#!, for 5 years\n\n#high Everyone#!\n• Gains #P Satisfied Desire#! for 1 year, reducing Stress Gain by #P 25%#!\n\n#high Pregnancy#!\n• Every eligible participant has an individual chance to conceive, based on the Fertility of both of you"
+
+ pcr_orgy.0002.t:0 "Harem Orgy"
+ pcr_orgy.0002.desc:0 "As you enter your bedchamber, an unforgettable sight greets you: your whole harem waits for you on the great bed, unclothed and willing. Two of them begin a slow, teasing dance, and before long three of your beauties surround you, undressing you piece by piece as their hands wander over your body and draw you toward the bed.\n\nYour favorite lies there waiting, unwilling to give up her privilege of having you first. She wraps her legs around your waist, pulls you close and whispers in your ear: \"Come, my liege. We have been waiting for you.\""
+ pcr_orgy.0002.a:0 "Pleasure awaits..."
+
+ pcr_orgy.0003.t:0 "A Night of Pleasure"
+ pcr_orgy.0003.desc:0 "As you enter your bedchamber, you find [pcr_orgy_favorite.GetShortUINameNoTooltip] waiting for you on the great bed, unclothed and willing. She lets you take your time undressing, then wraps her legs around your waist, pulls you close and whispers in your ear: \"Come, my liege. I have been waiting for you.\""
+ pcr_orgy.0003.a:0 "Pleasure awaits..."
+
+ pcr_orgy_satisfied_desire_modifier:0 "Satisfied Desire"
+ pcr_orgy_satisfied_desire_modifier_desc:0 "Recent pleasures have left this character relaxed and content."
+
+ pcr_orgy_participant_opinion:0 "Shared Intimacy"
+ pcr_orgy_lover_opinion:0 "Passionate Night Together"
+ pcr_orgy_soulmate_opinion:0 "Unforgettable Night Together"

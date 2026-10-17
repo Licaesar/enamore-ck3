@@ -1,0 +1,84 @@
+﻿# Painel com os retratos das participantes da orgia do harém, ao lado do evento.
+# Aparece enquanto o jogador tem a variável pcr_show_orgy_panel (ligada em
+# pcr_orgy_prepare_effect e removida em pcr_orgy_resolve_effect).
+window = {
+	name = "pcr_orgy_participants_panel"
+
+	layer = top
+
+	parentanchor = right|vcenter
+	position = { -30 0 }
+
+	size = { 410 450 }
+
+	using = Window_Background
+	using = Window_Decoration_Frontend_Flat
+
+	visible = "[And(GetPlayer.IsValid, GetPlayer.MakeScope.Var('pcr_show_orgy_panel').IsSet)]"
+
+	vbox = {
+		using = Window_Margins
+
+		hbox = {
+			layoutpolicy_horizontal = expanding
+
+			expand = {}
+
+			text_single = {
+				text = "pcr_orgy_participants_title"
+
+				fontsize = 24
+				fontsize_min = 18
+
+				using = Font_Type_Flavor
+
+				default_format = "#high;glow_color:{0.1,0.1,0.1,1.0}"
+			}
+
+			expand = {}
+		}
+
+		spacer = {
+			size = { 0 12 }
+		}
+
+		scrollarea = {
+			layoutpolicy_horizontal = expanding
+			layoutpolicy_vertical = expanding
+
+			scrollbarpolicy_vertical = as_needed
+			scrollbarpolicy_horizontal = always_off
+
+			scrollbar_vertical = {
+				using = Scrollbar_Vertical
+			}
+
+			scrollwidget = {
+				# Grade de retratos com 3 colunas
+				fixedgridbox = {
+					datamodel = "[GetPlayer.MakeScope.GetList('pcr_orgy_partners')]"
+
+					flipdirection = yes
+					datamodel_wrap = 3
+
+					maxhorizontalslots = 3
+
+					addcolumn = 105
+					addrow = 105
+
+					item = {
+						widget = {
+							size = { 105 105 }
+
+							datacontext = "[Scope.GetCharacter]"
+
+							portrait_head_small = {
+								parentanchor = center
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

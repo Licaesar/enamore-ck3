@@ -65,7 +65,7 @@ O mod foi refeito a partir de três mods de outros autores, que estavam misturad
 
 ## Validação
 
-- Validado com o [ck3-tiger](https://github.com/amtep/tiger) para 1.20. O único aviso são 2 erros de `datafunctions` em linhas vanilla do `window_character.gui`, que são falsos positivos: o Tiger ainda não conhece essas funções da 1.20.
+- Validado com o [ck3-tiger](https://github.com/amtep/tiger) para 1.20. O Tiger acusa só 2 erros de `datafunctions` em linhas vanilla do `window_character.gui`, que são falsos positivos: o Tiger ainda não conhece essas funções da 1.20.
 - Testado em jogo na 1.20.1.1 em 16/10/2026, sem nenhum erro do mod no `error.log`. A interação pessoal e a ficha de personagem foram testadas no mesmo dia, com 2, 3, 4 e 10 esposas.
 
 ## Créditos

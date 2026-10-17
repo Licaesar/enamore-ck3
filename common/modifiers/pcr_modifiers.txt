@@ -1,0 +1,5 @@
+﻿# Depois da orgia: menos estresse por 1 ano
+pcr_orgy_satisfied_desire_modifier = {
+	icon = stress_negative
+	stress_gain_mult = -0.25
+}

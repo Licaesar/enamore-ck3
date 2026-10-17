@@ -27,3 +27,19 @@ pcr_forced_union_positive_opinion = {
 	opinion = 100
 	months = 120
 }
+
+# Orgia do harém: opinião das participantes sobre o jogador, por 5 anos
+pcr_orgy_participant_opinion = {
+	opinion = 25
+	years = 5
+}
+
+pcr_orgy_lover_opinion = {
+	opinion = 50
+	years = 5
+}
+
+pcr_orgy_soulmate_opinion = {
+	opinion = 100
+	years = 5
+}

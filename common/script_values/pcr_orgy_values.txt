@@ -1,0 +1,23 @@
+﻿# Custo da decisão: 10 de piedade por participante elegível
+pcr_orgy_piety_cost = {
+	value = 0
+	every_consort = {
+		limit = { pcr_orgy_valid_partner_trigger = yes }
+		add = 10
+	}
+}
+
+# Chance de concepção (%) da participante. Escopo: a participante;
+# scope:pcr_orgy_father = o jogador. Com fertilidade 0,5 nos dois, a chance é 50%.
+# Fertilidade zero ou negativa em qualquer um dos dois zera a chance.
+pcr_orgy_conception_chance = {
+	value = 200
+	multiply = {
+		value = fertility
+		min = 0
+	}
+	multiply = {
+		value = scope:pcr_orgy_father.fertility
+		min = 0
+	}
+}

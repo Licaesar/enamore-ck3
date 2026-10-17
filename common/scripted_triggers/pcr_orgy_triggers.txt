@@ -1,0 +1,13 @@
+﻿# Cônjuge ou concubina que pode participar da orgia do harém
+pcr_orgy_valid_partner_trigger = {
+	is_alive = yes
+	is_adult = yes
+	is_female = yes
+	is_pregnant = no
+	is_imprisoned = no
+	age <= 50
+	# Sem filho de colo (menos de 1 ano)
+	NOT = {
+		any_child = { age < 1 }
+	}
+}

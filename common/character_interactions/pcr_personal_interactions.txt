@@ -1,0 +1,85 @@
+﻿# Interações pessoais do Polycarater
+
+# Passar o filho de concubina para a casa do genitor concubino.
+# No vanilla o filho de concubina nasce na casa de quem detém a concubina.
+# Só o jogador; custa 10 de renome, cobrado no efeito para que não seja
+# preciso ser o dynasta (o custo nativo de renome exige o dynasta).
+pcr_concubine_parent_house_interaction = {
+	category = interaction_category_friendly
+	icon = icon_dynasty
+	desc = pcr_concubine_parent_house_interaction_desc
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+			exists = dynasty
+		}
+		scope:recipient = {
+			# Ainda na casa de quem detém a concubina
+			house ?= scope:actor.house
+			OR = {
+				AND = {
+					father ?= scope:actor
+					mother ?= { pcr_was_concubine_of_trigger = { CHARACTER = scope:actor } }
+				}
+				AND = {
+					mother ?= scope:actor
+					father ?= { pcr_was_concubine_of_trigger = { CHARACTER = scope:actor } }
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor.dynasty = {
+			custom_tooltip = {
+				text = pcr_concubine_parent_house_renown_tt
+				dynasty_prestige >= 10
+			}
+		}
+		scope:recipient = {
+			trigger_if = {
+				limit = { father ?= scope:actor }
+				custom_tooltip = {
+					text = pcr_concubine_parent_house_lowborn_tt
+					exists = mother.house
+				}
+				trigger_if = {
+					limit = { exists = mother.house }
+					custom_tooltip = {
+						text = pcr_concubine_parent_house_same_tt
+						NOT = { house = mother.house }
+					}
+				}
+			}
+			trigger_else = {
+				custom_tooltip = {
+					text = pcr_concubine_parent_house_lowborn_tt
+					exists = father.house
+				}
+				trigger_if = {
+					limit = { exists = father.house }
+					custom_tooltip = {
+						text = pcr_concubine_parent_house_same_tt
+						NOT = { house = father.house }
+					}
+				}
+			}
+		}
+	}
+
+	on_accept = {
+		scope:actor.dynasty = { add_dynasty_prestige = -10 }
+		scope:recipient = {
+			if = {
+				limit = { father ?= scope:actor }
+				set_house = mother.house
+			}
+			else = {
+				set_house = father.house
+			}
+		}
+	}
+
+	auto_accept = yes
+}

@@ -7,3 +7,14 @@ pcr_can_force_marry_trigger = {
 	NOT = { has_trait = beardless_eunuch }
 	NOT = { has_trait = order_member }
 }
+
+# O genitor é ou foi concubina (ou concubino) de CHARACTER, mesmo morto (escopo: o genitor)
+pcr_was_concubine_of_trigger = {
+	OR = {
+		is_concubine_of = $CHARACTER$
+		any_former_concubinist = {
+			even_if_dead = yes
+			this = $CHARACTER$
+		}
+	}
+}

@@ -43,3 +43,10 @@
  pcr_adopt_enamore_decision_desc:0 "My culture honors those who bear the Enamore trait. With enough [piety|E], I can claim that privilege for myself."
  pcr_adopt_enamore_decision_tooltip:0 "Gain the [GetTrait('pcr_enamore').GetName( GetNullCharacter )] trait"
  pcr_adopt_enamore_decision_confirm:0 "Embrace It"
+
+ # Casa do genitor concubino
+ pcr_concubine_parent_house_interaction:0 "Join Concubine Parent's House"
+ pcr_concubine_parent_house_interaction_desc:0 "Move [recipient.GetShortUINameNoTooltip] into the [house|E] of [recipient.GetHerHis] concubine parent."
+ pcr_concubine_parent_house_renown_tt:0 "Your [dynasty|E] needs at least 10 [renown|E]"
+ pcr_concubine_parent_house_lowborn_tt:0 "[recipient.GetShortUINameNoTooltip|U]'s concubine parent is [lowborn|E]"
+ pcr_concubine_parent_house_same_tt:0 "[recipient.GetShortUINameNoTooltip|U] already belongs to the [house|E] of [recipient.GetHerHis] concubine parent"

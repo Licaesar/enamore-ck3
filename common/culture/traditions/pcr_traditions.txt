@@ -4,11 +4,9 @@ tradition_pcr_enamore_customs = {
 	category = ritual
 
 	layers = {
-		0 = intrigue
-		1 = mediterranean
-		2 = "rec1 copy 2.dds"
-		3 = 1.dds
-		4 = greeting.dds
+		0 = diplo
+		1 = mena
+		4 = temple.dds
 	}
 
 	can_pick = {
@@ -51,7 +49,7 @@ tradition_pcr_enamore_customs = {
 	# Na 1.20 o limite de cônjuges fica em partners (substitui o da fé). Só esposas:
 	# sem number_of_consorts, as concubinas seguem a fé.
 	partners = {
-		number_of_spouses = 20
+		number_of_spouses = 10
 	}
 
 	ai_will_do = { value = 0 }

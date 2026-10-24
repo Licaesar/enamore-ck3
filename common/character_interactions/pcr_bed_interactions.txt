@@ -16,6 +16,7 @@ pcr_bed_spouse_interaction = {
 			is_spouse_of = scope:actor
 			is_adult = yes
 			is_imprisoned = no
+			pcr_bed_partner_allowed_trigger = yes
 		}
 	}
 
@@ -45,6 +46,7 @@ pcr_bed_concubine_interaction = {
 			is_concubine_of = scope:actor
 			is_adult = yes
 			is_imprisoned = no
+			pcr_bed_partner_allowed_trigger = yes
 		}
 	}
 
@@ -81,6 +83,7 @@ pcr_bed_lover_interaction = {
 			}
 			is_adult = yes
 			is_imprisoned = no
+			pcr_bed_partner_allowed_trigger = yes
 		}
 	}
 

@@ -2,6 +2,7 @@
 pcr_bed_relative_trigger = {
 	is_adult = yes
 	is_imprisoned = no
+	pcr_bed_partner_allowed_trigger = yes
 	# Parceiro já tem a interação própria
 	NOR = {
 		is_spouse_of = scope:actor
@@ -26,4 +27,10 @@ pcr_bed_relative_valid_trigger = {
 pcr_bed_can_conceive_trigger = {
 	is_pregnant = no
 	fertility > 0
+}
+
+# Escopo: o recipiente. Ponto de extensão para patches (ex.: personagem sem mente
+# numa conversão total); no Polycarater sozinho não restringe nada.
+pcr_bed_partner_allowed_trigger = {
+	always = yes
 }

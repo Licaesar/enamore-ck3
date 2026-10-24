@@ -21,3 +21,9 @@ pcr_bed_relative_valid_trigger = {
 		}
 	}
 }
+
+# Escopo: a mãe. Pode engravidar agora
+pcr_bed_can_conceive_trigger = {
+	is_pregnant = no
+	fertility > 0
+}

@@ -84,12 +84,11 @@ pcr_bed_effect = {
 }
 
 # Escopo: a mãe (scope:pcr_bed_mother). Gravidez garantida se ela puder engravidar.
+# CHILDREN: 1 ou 2 (gêmeos). As variáveis guardam a escolha para reaplicá-la
+# depois da revelação (pcr_bed.0010) e somem no parto (pcr_on_birth_mother).
 pcr_bed_conceive_effect = {
 	if = {
-		limit = {
-			is_pregnant = no
-			fertility > 0
-		}
+		limit = { pcr_bed_can_conceive_trigger = yes }
 		# Impede que a regra de gravidez realista do Love Marriage encerre a
 		# gravidez; sem esse mod, o flag não faz nada.
 		add_character_flag = {
@@ -98,6 +97,58 @@ pcr_bed_conceive_effect = {
 		}
 		make_pregnant = {
 			father = scope:pcr_bed_father
+			number_of_children = $CHILDREN$
+		}
+		set_variable = {
+			name = pcr_bed_children
+			value = $CHILDREN$
+			years = 1
+		}
+		set_variable = {
+			name = pcr_bed_father
+			value = scope:pcr_bed_father
+			years = 1
+		}
+		remove_variable = pcr_bed_gender
+	}
+}
+
+# Escopo: a mãe. GENDER: male ou female
+pcr_bed_set_gender_effect = {
+	set_pregnancy_gender = $GENDER$
+	set_variable = {
+		name = pcr_bed_gender
+		value = flag:$GENDER$
+		years = 1
+	}
+}
+
+# Escopo: a mãe. Só mexe na gravidez feita pelo pcr_bed (mesmo pai guardado).
+pcr_bed_reapply_pregnancy_effect = {
+	if = {
+		limit = {
+			is_pregnant = yes
+			exists = var:pcr_bed_father
+			pregnancy_real_father ?= var:pcr_bed_father
+		}
+		if = {
+			limit = { var:pcr_bed_children ?= 2 }
+			set_num_pregnancy_children = 2
+		}
+		if = {
+			limit = { var:pcr_bed_gender ?= flag:male }
+			set_pregnancy_gender = male
+		}
+		else_if = {
+			limit = { var:pcr_bed_gender ?= flag:female }
+			set_pregnancy_gender = female
 		}
 	}
+}
+
+# Escopo: a mãe, no parto
+pcr_bed_clear_pregnancy_effect = {
+	remove_variable = pcr_bed_children
+	remove_variable = pcr_bed_father
+	remove_variable = pcr_bed_gender
 }

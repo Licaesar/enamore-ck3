@@ -45,27 +45,60 @@ pcr_bed.0001 = {
 		scope:pcr_bed_partner = { pcr_orgy_undress_effect = yes }
 	}
 
-	# Ator homem: terminar dentro
+	# Terminar dentro: um filho
 	option = {
-		name = pcr_bed.0001.a_give
+		name = {
+			trigger = { scope:pcr_bed_father ?= root }
+			text = pcr_bed.0001.a_give
+		}
+		name = {
+			trigger = { scope:pcr_bed_mother ?= root }
+			text = pcr_bed.0001.a_receive
+		}
 		trigger = {
 			exists = scope:pcr_bed_mother
-			scope:pcr_bed_father ?= root
+			scope:pcr_bed_mother = { pcr_bed_can_conceive_trigger = yes }
 		}
-		scope:pcr_bed_mother = { pcr_bed_conceive_effect = yes }
+		scope:pcr_bed_mother = { pcr_bed_conceive_effect = { CHILDREN = 1 } }
+		trigger_event = pcr_bed.0002
 	}
 
-	# Ator mulher: deixar terminar dentro
+	# Terminar dentro: gêmeos
 	option = {
-		name = pcr_bed.0001.a_receive
+		name = {
+			trigger = { scope:pcr_bed_father ?= root }
+			text = pcr_bed.0001.twins_give
+		}
+		name = {
+			trigger = { scope:pcr_bed_mother ?= root }
+			text = pcr_bed.0001.twins_receive
+		}
 		trigger = {
 			exists = scope:pcr_bed_mother
-			scope:pcr_bed_mother ?= root
+			scope:pcr_bed_mother = { pcr_bed_can_conceive_trigger = yes }
 		}
-		scope:pcr_bed_mother = { pcr_bed_conceive_effect = yes }
+		scope:pcr_bed_mother = { pcr_bed_conceive_effect = { CHILDREN = 2 } }
+		trigger_event = pcr_bed.0002
 	}
 
-	# Sexos opostos: sem gravidez
+	# Terminar dentro sem gravidez possível (já grávida ou sem fertilidade)
+	option = {
+		name = {
+			trigger = { scope:pcr_bed_father ?= root }
+			text = pcr_bed.0001.a_give
+		}
+		name = {
+			trigger = { scope:pcr_bed_mother ?= root }
+			text = pcr_bed.0001.a_receive
+		}
+		trigger = {
+			exists = scope:pcr_bed_mother
+			scope:pcr_bed_mother = { pcr_bed_can_conceive_trigger = no }
+		}
+		custom_tooltip = pcr_bed.0001.no_conception_tt
+	}
+
+	# Sexos opostos: tirar
 	option = {
 		name = {
 			trigger = { scope:pcr_bed_father ?= root }
@@ -94,5 +127,78 @@ pcr_bed.0001 = {
 	after = {
 		pcr_orgy_dress_effect = yes
 		scope:pcr_bed_partner = { pcr_orgy_dress_effect = yes }
+	}
+}
+
+# Escolha do sexo da criança, logo depois da concepção. Root: o ator.
+# A escolha vale para todos os filhos da gravidez (um ou gêmeos).
+pcr_bed.0002 = {
+	type = character_event
+	title = pcr_bed.0002.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:pcr_bed_mother = { var:pcr_bed_children ?= 2 } }
+				desc = pcr_bed.0002.desc_twins
+			}
+			desc = pcr_bed.0002.desc
+		}
+	}
+	theme = lover_relation
+
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:pcr_bed_partner
+		animation = love
+	}
+
+	trigger = {
+		scope:pcr_bed_mother = { has_variable = pcr_bed_children }
+	}
+
+	option = {
+		name = {
+			trigger = { scope:pcr_bed_mother = { var:pcr_bed_children ?= 2 } }
+			text = pcr_bed.0002.a_twins
+		}
+		name = {
+			trigger = { scope:pcr_bed_mother = { NOT = { var:pcr_bed_children ?= 2 } } }
+			text = pcr_bed.0002.a
+		}
+		custom_tooltip = pcr_bed.0002.a_tt
+		scope:pcr_bed_mother = { pcr_bed_set_gender_effect = { GENDER = male } }
+	}
+
+	option = {
+		name = {
+			trigger = { scope:pcr_bed_mother = { var:pcr_bed_children ?= 2 } }
+			text = pcr_bed.0002.b_twins
+		}
+		name = {
+			trigger = { scope:pcr_bed_mother = { NOT = { var:pcr_bed_children ?= 2 } } }
+			text = pcr_bed.0002.b
+		}
+		custom_tooltip = pcr_bed.0002.b_tt
+		scope:pcr_bed_mother = { pcr_bed_set_gender_effect = { GENDER = female } }
+	}
+
+	# Deixa o sexo ao acaso
+	option = {
+		name = pcr_bed.0002.c
+	}
+}
+
+# Oculto: reaplica gêmeos e sexo depois que a gravidez é revelada. O vanilla e o
+# Love Marriage forçam 1 filho em gravidez de mãe solteira (pregnancy.2001 e outros).
+# Root: a mãe.
+pcr_bed.0010 = {
+	type = character_event
+	hidden = yes
+
+	immediate = {
+		pcr_bed_reapply_pregnancy_effect = yes
 	}
 }

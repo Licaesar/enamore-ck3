@@ -9,3 +9,30 @@ pcr_on_birth_child = {
 		pcr_impregnate.0002
 	}
 }
+
+# Gêmeos e sexo do pcr_bed: reaplicados depois da revelação da gravidez
+on_pregnancy_mother = {
+	on_actions = { pcr_on_pregnancy_mother }
+}
+
+# root: a mãe
+pcr_on_pregnancy_mother = {
+	trigger = { exists = var:pcr_bed_father }
+	effect = {
+		pcr_bed_reapply_pregnancy_effect = yes
+		trigger_event = { id = pcr_bed.0010 days = 5 }
+		trigger_event = { id = pcr_bed.0010 days = 60 }
+	}
+}
+
+on_birth_mother = {
+	on_actions = { pcr_on_birth_mother }
+}
+
+# root: a mãe
+pcr_on_birth_mother = {
+	trigger = { exists = var:pcr_bed_father }
+	effect = {
+		pcr_bed_clear_pregnancy_effect = yes
+	}
+}

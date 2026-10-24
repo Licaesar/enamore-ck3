@@ -1,4 +1,4 @@
-# Polycarater (Enamore)
+﻿# Polycarater (Enamore)
 
 Mod de Crusader Kings III que reúne interações de prisão, uma interação de família, uma decisão de orgia do harém e um sistema de casamento múltiplo, o **Enamore**. Feito para o jogo **1.20.1.1 (Crozier)**.
 
@@ -38,7 +38,8 @@ O mod foi refeito a partir de quatro mods de outros autores, que estavam mistura
 - Seis interações na categoria Pessoal, sem cooldown, cada uma abrindo o evento `pcr_bed.0001` (texto e opções conforme o sexo dos dois):
   - **Lay with Spouse**, **Lay with Concubine**, **Lay with Lover**: aceitas sempre; menos estresse para os dois, opinião do parceiro e chance de virar amante ou alma gêmea.
   - **Lay with Cousin**, **Lay with Sibling**, **Lay with Child**: o parente precisa ter opinião 25 ou mais e pode recusar; chance de virar amante e segredo de incesto se a fé condena. A de filho só aparece para quem é Seducer, Deviant, Lustful, Incestuous ou Rakish.
-  - Entre sexos opostos, a opção de terminar dentro engravida a mulher se ela não estiver grávida e tiver fertilidade.
+  - Entre sexos opostos, se a mulher não estiver grávida e tiver fertilidade, o evento oferece gravidez de um filho ou de gêmeos (garantida). Em seguida, um segundo evento deixa escolher o sexo (filho, filha ou ao acaso), que vale para todos os filhos da gravidez.
+  - Gêmeos e sexo são reaplicados 5 e 60 dias depois da revelação da gravidez, porque o vanilla e o Love Marriage forçam 1 filho na gravidez de mãe solteira.
   - Origem: **Bed Relations**; a interação de prisioneiro do original ficou de fora porque o mod já tem a Impregnate Captive.
 
 ### Interações de prisão

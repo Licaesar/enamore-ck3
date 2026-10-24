@@ -33,13 +33,21 @@ O mod foi refeito a partir de quatro mods de outros autores, que estavam mistura
   - Cada participante pode engravidar, conforme a fertilidade dela e a do jogador (chance de 50% com 0,5 nos dois).
   - Origem: **Lay With Your Harem / Lay your Realm** (Workshop 3786186573); só a decisão e o evento foram mantidos.
 
+### Deitar com parceiro ou parente
+
+- Seis interações na categoria Pessoal, sem cooldown, cada uma abrindo o evento `pcr_bed.0001` (texto e opções conforme o sexo dos dois):
+  - **Lay with Spouse**, **Lay with Concubine**, **Lay with Lover**: aceitas sempre; menos estresse para os dois, opinião do parceiro e chance de virar amante ou alma gêmea.
+  - **Lay with Cousin**, **Lay with Sibling**, **Lay with Child**: o parente precisa ter opinião 25 ou mais e pode recusar; chance de virar amante e segredo de incesto se a fé condena. A de filho só aparece para quem é Seducer, Deviant, Lustful, Incestuous ou Rakish.
+  - Entre sexos opostos, a opção de terminar dentro engravida a mulher se ela não estiver grávida e tiver fertilidade.
+  - Origem: **Bed Relations**; a interação de prisioneiro do original ficou de fora porque o mod já tem a Impregnate Captive.
+
 ### Interações de prisão
 
 - **Forcefully Marry Prisoner** (`pcr_force_marriage_interaction`): casa o prisioneiro com o captor, com um cortesão ou com um filho do captor. Desfaz o casamento anterior do prisioneiro, e o ex-cônjuge passa a ter rancor do captor.
 - **Impregnate Captive** (`pcr_impregnate_interaction`): só para o jogador.
   - A prisioneira sempre engravida.
   - A opinião dela sobre o captor muda para -100 (80% de chance) ou +100 (20%).
-  - Cooldown de 30 dias para a mesma prisioneira.
+  - Sem cooldown; só não aparece válida enquanto a prisioneira estiver grávida.
   - Se ela for solteira, o jogador recebe um aviso quando a criança nasce.
 
 ## Instalação

@@ -1,0 +1,23 @@
+﻿# Deitar com parente: escopo é o recipiente
+pcr_bed_relative_trigger = {
+	is_adult = yes
+	is_imprisoned = no
+	# Parceiro já tem a interação própria
+	NOR = {
+		is_spouse_of = scope:actor
+		is_concubine_of = scope:actor
+		has_relation_lover = scope:actor
+		has_relation_soulmate = scope:actor
+	}
+}
+
+# Deitar com parente: o parente precisa gostar do ator
+pcr_bed_relative_valid_trigger = {
+	scope:recipient = {
+		is_available = yes
+		opinion = {
+			target = scope:actor
+			value >= 25
+		}
+	}
+}

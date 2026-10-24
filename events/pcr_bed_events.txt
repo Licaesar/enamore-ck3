@@ -1,0 +1,98 @@
+﻿namespace = pcr_bed
+
+# Deitar com parceiro ou parente. Root: o ator. Escopos de pcr_bed_effect:
+# pcr_bed_partner (o recipiente) e, entre sexos opostos, pcr_bed_mother e pcr_bed_father.
+pcr_bed.0001 = {
+	type = character_event
+	title = pcr_bed.0001.t
+	desc = {
+		first_valid = {
+			# Ator mulher com homem
+			triggered_desc = {
+				trigger = {
+					exists = scope:pcr_bed_mother
+					scope:pcr_bed_mother ?= root
+				}
+				desc = pcr_bed.0001.desc_receive
+			}
+			# Ator homem com mulher
+			triggered_desc = {
+				trigger = { exists = scope:pcr_bed_mother }
+				desc = pcr_bed.0001.desc_give
+			}
+			# Dois homens
+			triggered_desc = {
+				trigger = { is_female = no }
+				desc = pcr_bed.0001.desc_male
+			}
+			# Duas mulheres
+			desc = pcr_bed.0001.desc_female
+		}
+	}
+	theme = lover_relation
+
+	left_portrait = {
+		character = root
+		animation = love
+	}
+	right_portrait = {
+		character = scope:pcr_bed_partner
+		animation = love
+	}
+
+	immediate = {
+		pcr_orgy_undress_effect = yes
+		scope:pcr_bed_partner = { pcr_orgy_undress_effect = yes }
+	}
+
+	# Ator homem: terminar dentro
+	option = {
+		name = pcr_bed.0001.a_give
+		trigger = {
+			exists = scope:pcr_bed_mother
+			scope:pcr_bed_father ?= root
+		}
+		scope:pcr_bed_mother = { pcr_bed_conceive_effect = yes }
+	}
+
+	# Ator mulher: deixar terminar dentro
+	option = {
+		name = pcr_bed.0001.a_receive
+		trigger = {
+			exists = scope:pcr_bed_mother
+			scope:pcr_bed_mother ?= root
+		}
+		scope:pcr_bed_mother = { pcr_bed_conceive_effect = yes }
+	}
+
+	# Sexos opostos: sem gravidez
+	option = {
+		name = {
+			trigger = { scope:pcr_bed_father ?= root }
+			text = pcr_bed.0001.b_give
+		}
+		name = {
+			trigger = { scope:pcr_bed_mother ?= root }
+			text = pcr_bed.0001.b_receive
+		}
+		trigger = { exists = scope:pcr_bed_mother }
+	}
+
+	# Mesmo sexo
+	option = {
+		name = {
+			trigger = { is_female = no }
+			text = pcr_bed.0001.c_male
+		}
+		name = {
+			trigger = { is_female = yes }
+			text = pcr_bed.0001.c_female
+		}
+		trigger = { NOT = { exists = scope:pcr_bed_mother } }
+	}
+
+	after = {
+		pcr_orgy_dress_effect = yes
+		scope:pcr_bed_partner = { pcr_orgy_dress_effect = yes }
+	}
+}

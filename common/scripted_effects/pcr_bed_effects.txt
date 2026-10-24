@@ -1,0 +1,103 @@
+﻿# Deitar com parceiro ou parente (integrado do Bed Relations).
+# Escopo de chamada: o on_accept da interação (scope:actor e scope:recipient).
+# Sem cooldown: a interação pode ser usada de novo logo em seguida.
+
+# OPINION: opinião do recipiente sobre o ator
+# LOVER / SOULMATE: chance (%) de virar amante / alma gêmea
+# INCEST: yes nas interações de parentes (motivo de amante proibido e segredo de incesto)
+pcr_bed_effect = {
+	# Quem pode engravidar: só entre sexos opostos
+	if = {
+		limit = { scope:actor = { sex_opposite_of = scope:recipient } }
+		if = {
+			limit = { scope:actor = { is_female = yes } }
+			scope:actor = { save_scope_as = pcr_bed_mother }
+			scope:recipient = { save_scope_as = pcr_bed_father }
+		}
+		else = {
+			scope:recipient = { save_scope_as = pcr_bed_mother }
+			scope:actor = { save_scope_as = pcr_bed_father }
+		}
+	}
+	scope:recipient = {
+		save_scope_as = pcr_bed_partner
+		# O tema lover_relation lê scope:lover
+		save_scope_as = lover
+	}
+
+	scope:actor = {
+		stress_impact = {
+			base = minor_stress_impact_loss
+			lustful = medium_stress_impact_loss
+		}
+		trigger_event = pcr_bed.0001
+	}
+	scope:recipient = {
+		stress_impact = {
+			base = minor_stress_impact_loss
+			lustful = medium_stress_impact_loss
+		}
+		add_opinion = {
+			target = scope:actor
+			modifier = pcr_bed_opinion
+			opinion = $OPINION$
+		}
+	}
+
+	# Amante e, se já for amante, chance de alma gêmea
+	if = {
+		limit = {
+			scope:actor = { NOT = { has_relation_lover = scope:recipient } }
+		}
+		random = {
+			chance = $LOVER$
+			scope:actor = {
+				if = {
+					limit = { always = $INCEST$ }
+					set_relation_lover = { target = scope:recipient reason = pcr_lover_incest }
+				}
+				else = {
+					set_relation_lover = { target = scope:recipient reason = pcr_lover_bed }
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			scope:actor = { NOT = { has_relation_soulmate = scope:recipient } }
+		}
+		random = {
+			chance = $SOULMATE$
+			scope:actor = {
+				set_relation_soulmate = { target = scope:recipient reason = pcr_soulmate_bed }
+			}
+		}
+	}
+
+	# Segredo de incesto, se a fé do ator ou do suserano condena (efeito vanilla)
+	if = {
+		limit = { always = $INCEST$ }
+		scope:actor = {
+			give_incest_secret_or_nothing_with_target_effect = { CHARACTER = scope:recipient }
+		}
+	}
+}
+
+# Escopo: a mãe (scope:pcr_bed_mother). Gravidez garantida se ela puder engravidar.
+pcr_bed_conceive_effect = {
+	if = {
+		limit = {
+			is_pregnant = no
+			fertility > 0
+		}
+		# Impede que a regra de gravidez realista do Love Marriage encerre a
+		# gravidez; sem esse mod, o flag não faz nada.
+		add_character_flag = {
+			flag = allow_event_pregnancy
+			days = 61
+		}
+		make_pregnant = {
+			father = scope:pcr_bed_father
+		}
+	}
+}

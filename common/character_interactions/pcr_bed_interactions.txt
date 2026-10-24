@@ -1,0 +1,201 @@
+﻿# Deitar com parceiro ou parente (integrado do Bed Relations).
+# As variantes por sexo do original viraram uma interação por relação; o evento
+# pcr_bed.0001 escolhe o texto e a gravidez pelo sexo dos dois.
+# Sem cooldown. A interação de prisioneiro do original ficou de fora: o Polycarater
+# já tem pcr_impregnate_interaction.
+
+# Cônjuge
+pcr_bed_spouse_interaction = {
+	category = interaction_category_friendly
+	use_diplomatic_range = yes
+	desc = pcr_bed_partner_interaction_desc
+
+	is_shown = {
+		scope:actor = { is_adult = yes }
+		scope:recipient = {
+			is_spouse_of = scope:actor
+			is_adult = yes
+			is_imprisoned = no
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_available = yes }
+	}
+
+	auto_accept = yes
+
+	on_accept = {
+		pcr_bed_effect = { OPINION = 25 LOVER = 20 SOULMATE = 5 INCEST = no }
+	}
+
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+# Concubina ou concubino
+pcr_bed_concubine_interaction = {
+	category = interaction_category_friendly
+	use_diplomatic_range = yes
+	desc = pcr_bed_partner_interaction_desc
+
+	is_shown = {
+		scope:actor = { is_adult = yes }
+		scope:recipient = {
+			is_concubine_of = scope:actor
+			is_adult = yes
+			is_imprisoned = no
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_available = yes }
+	}
+
+	auto_accept = yes
+
+	on_accept = {
+		pcr_bed_effect = { OPINION = 10 LOVER = 30 SOULMATE = 2 INCEST = no }
+	}
+
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+# Amante ou alma gêmea fora do casamento
+pcr_bed_lover_interaction = {
+	category = interaction_category_friendly
+	use_diplomatic_range = yes
+	desc = pcr_bed_partner_interaction_desc
+
+	is_shown = {
+		scope:actor = { is_adult = yes }
+		scope:recipient = {
+			OR = {
+				has_relation_lover = scope:actor
+				has_relation_soulmate = scope:actor
+			}
+			NOR = {
+				is_spouse_of = scope:actor
+				is_concubine_of = scope:actor
+			}
+			is_adult = yes
+			is_imprisoned = no
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_available = yes }
+	}
+
+	auto_accept = yes
+
+	on_accept = {
+		pcr_bed_effect = { OPINION = 50 LOVER = 0 SOULMATE = 0 INCEST = no }
+	}
+
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+# Primo ou prima
+pcr_bed_cousin_interaction = {
+	category = interaction_category_friendly
+	use_diplomatic_range = yes
+	desc = pcr_bed_cousin_interaction_desc
+
+	is_shown = {
+		scope:actor = { is_adult = yes }
+		scope:recipient = {
+			is_cousin_of = scope:actor
+			pcr_bed_relative_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		pcr_bed_relative_valid_trigger = yes
+	}
+
+	ai_accept = {
+		base = 0
+		pcr_bed_relative_ai_accept = { DEVIANT = 40 CHASTE = 30 }
+	}
+
+	on_accept = {
+		pcr_bed_effect = { OPINION = 25 LOVER = 35 SOULMATE = 0 INCEST = yes }
+	}
+
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+# Irmão ou irmã
+pcr_bed_sibling_interaction = {
+	category = interaction_category_friendly
+	use_diplomatic_range = yes
+	desc = pcr_bed_sibling_interaction_desc
+
+	is_shown = {
+		scope:actor = { is_adult = yes }
+		scope:recipient = {
+			is_sibling_of = scope:actor
+			pcr_bed_relative_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		pcr_bed_relative_valid_trigger = yes
+	}
+
+	ai_accept = {
+		base = 0
+		pcr_bed_relative_ai_accept = { DEVIANT = 50 CHASTE = 50 }
+	}
+
+	on_accept = {
+		pcr_bed_effect = { OPINION = 25 LOVER = 40 SOULMATE = 0 INCEST = yes }
+	}
+
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}
+
+# Filho ou filha; só para quem tem um traço de luxúria
+pcr_bed_child_interaction = {
+	category = interaction_category_friendly
+	use_diplomatic_range = yes
+	desc = pcr_bed_child_interaction_desc
+
+	is_shown = {
+		scope:actor = {
+			is_adult = yes
+			OR = {
+				has_trait = seducer
+				has_trait = deviant
+				has_trait = lustful
+				has_trait = incestuous
+				has_trait = rakish
+			}
+		}
+		scope:recipient = {
+			is_child_of = scope:actor
+			pcr_bed_relative_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		pcr_bed_relative_valid_trigger = yes
+	}
+
+	ai_accept = {
+		base = 0
+		pcr_bed_relative_ai_accept = { DEVIANT = 75 CHASTE = 30 }
+	}
+
+	on_accept = {
+		pcr_bed_effect = { OPINION = 25 LOVER = 25 SOULMATE = 0 INCEST = yes }
+	}
+
+	ai_frequency = 0
+	ai_will_do = { base = 0 }
+}

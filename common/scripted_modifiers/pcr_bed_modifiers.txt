@@ -1,0 +1,34 @@
+﻿# Aceitação da IA ao deitar com parente. Escopo: o recipiente.
+# Opinião 25 a 49: +50; 50 ou mais: +100
+pcr_bed_relative_ai_accept = {
+	modifier = {
+		add = 50
+		opinion = {
+			target = scope:actor
+			value >= 25
+		}
+		opinion = {
+			target = scope:actor
+			value < 50
+		}
+	}
+	modifier = {
+		add = 100
+		opinion = {
+			target = scope:actor
+			value >= 50
+		}
+	}
+	modifier = {
+		add = 25
+		has_trait = lustful
+	}
+	modifier = {
+		add = $DEVIANT$
+		has_trait = deviant
+	}
+	modifier = {
+		add = -$CHASTE$
+		has_trait = chaste
+	}
+}

@@ -177,7 +177,5 @@ pcr_impregnate_interaction = {
 		}
 	}
 
-	cooldown_against_recipient = { days = 30 }
-
 	auto_accept = yes
 }

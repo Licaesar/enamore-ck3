@@ -43,3 +43,10 @@ pcr_orgy_soulmate_opinion = {
 	opinion = 100
 	years = 5
 }
+
+# Deitar com parceiro ou parente: opinião do recipiente; o valor vem da interação
+pcr_bed_opinion = {
+	opinion = 10
+	years = 1
+	decaying = yes
+}

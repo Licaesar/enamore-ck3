@@ -12,7 +12,7 @@ can_marry_trigger = {
 		limit = { has_trait = pcr_enamore }
 		custom_description = {
 			text = pcr_enamore_spouse_cap_tt
-			any_spouse = { count < 10 }
+			any_spouse = { count < 20 }
 		}
 	}
 	trigger_else_if = {

@@ -30,7 +30,7 @@
  # Enamore
  trait_pcr_enamore:0 "Enamore"
  trait_pcr_enamore_desc:0 "This character treats the marriage customs of faith and culture as guidance rather than law. They may have up to ten [spouses|E], regardless of whether their faith or culture normally permits more than one."
- pcr_enamore_spouse_cap_tt:0 "A character with [GetTrait('pcr_enamore').GetName( GetNullCharacter )] must have fewer than ten [spouses|E]"
+ pcr_enamore_spouse_cap_tt:0 "A character with [GetTrait('pcr_enamore').GetName( GetNullCharacter )] must have fewer than twenty [spouses|E]"
  pcr_enamore_trait_required_for_secondary_spouse_tt:0 "Without [GetTrait('pcr_enamore').GetName( GetNullCharacter )], a member of this culture may not take a secondary [spouse|E]"
  tradition_pcr_enamore_customs_name:0 "Enamore Customs"
  tradition_pcr_enamore_customs_desc:0 "This culture recognizes exceptional households only for those who bear the Enamore trait. They may have up to ten spouses, irrespective of their faith's usual form of marriage; culture members without the trait remain limited to one spouse. Concubines follow the rules of each faith."

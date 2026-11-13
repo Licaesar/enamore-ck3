@@ -5,4 +5,4 @@ tags={
 	"Events"
 }
 name="Polycarater"
-supported_version="1.20.1.1"
+supported_version="1.20.1.2"
